@@ -1,0 +1,9 @@
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: always
+
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context']
