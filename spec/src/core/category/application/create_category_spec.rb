@@ -21,9 +21,9 @@ RSpec.describe CreateCategory do
       is_active: true
     )
 
-    category_id = use_case.execute(request_dto)
+    response_dto = use_case.execute(request_dto)
 
-    expect(category_id).to(eq(uuid))
+    expect(response_dto.id).to(eq(uuid))
     expect(repository_double).to(have_received(:save))
   end
 

@@ -33,7 +33,7 @@ class CreateCategory
 
     @repository.save(category)
 
-    category.id
+    CreateCategoryResponse.new(id: category.id)
   rescue ArgumentError => e
     raise(InvalidCategoryData, e)
   end
