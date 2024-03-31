@@ -3,12 +3,12 @@
 require 'securerandom'
 
 require_relative '../../../../spec_helper'
-require_relative '../../../../../src/core/category/application/create_category'
-require_relative '../../../../../src/core/category/application/category_repository'
+require_relative '../../../../../src/core/category/application/use_cases/create_category'
+require_relative '../../../../../src/core/category/application/category_repository_interface'
 require_relative '../../../../../src/core/category/application/exceptions'
 
 RSpec.describe CreateCategory do
-  let(:repository_double) { instance_double('CategoryRepository', save: nil) }
+  let(:repository_double) { instance_double(CategoryRepositoryInterface, save: nil) }
 
   it 'should create a new category with valid data' do
     uuid = '123e4567-e89b-12d3-a456-426614174000'
