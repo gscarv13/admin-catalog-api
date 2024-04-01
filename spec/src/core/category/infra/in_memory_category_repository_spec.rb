@@ -23,4 +23,18 @@ RSpec.describe InMemoryCategoryRepository do
       expect(repository.get_by_id(id: category.id)).to(eq(category))
     end
   end
+
+  context '#delete' do
+    it 'deletes a category with corresponding id and return nil' do
+      category = Category.new(name: 'Moooovie', description: 'A very niiiiice movie')
+      repository = InMemoryCategoryRepository.new(categories: [category])
+
+      expect(repository.get_by_id(id: category.id)).to(eq(category))
+
+      result = repository.delete(id: category.id)
+
+      expect(result).to(be_nil)
+      expect(repository.categories.size).to(eq(0))
+    end
+  end
 end

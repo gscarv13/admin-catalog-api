@@ -16,4 +16,10 @@ class InMemoryCategoryRepository < CategoryRepositoryInterface
   def get_by_id(id:)
     @categories.find { |category| category.id == id }
   end
+
+  def delete(id:)
+    @categories.delete_if { |category| category.id == id }
+
+    nil
+  end
 end
