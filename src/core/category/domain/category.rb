@@ -3,7 +3,8 @@
 require 'securerandom'
 
 class Category
-  attr_reader :id, :name, :description, :is_active
+  attr_accessor :name, :description
+  attr_reader :id, :is_active
 
   def initialize(name:, id: nil, description: nil, is_active: true)
     validate(name)

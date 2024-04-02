@@ -22,4 +22,12 @@ class InMemoryCategoryRepository < CategoryRepositoryInterface
 
     nil
   end
+
+  def update(category)
+    old_category = get_by_id(id: category.id)
+    @categories.delete(old_category)
+    @categories << category
+
+    nil
+  end
 end

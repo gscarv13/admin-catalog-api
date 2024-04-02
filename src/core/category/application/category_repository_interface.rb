@@ -4,6 +4,7 @@ class CategoryRepositoryInterface
   def save(_category) = raise_not_implemented_error
   def get_by_id(_id) = raise_not_implemented_error
   def delete(_id) = raise_not_implemented_error
+  def update(_category) = raise_not_implemented_error
 
   private
 
