@@ -23,6 +23,12 @@ class InMemoryCategoryRepository < CategoryRepositoryInterface
     nil
   end
 
+  def list
+    # Given there is the possibility of returning an array that may be modified
+    # we should use a copy to not alter the original array
+    @categories.dup
+  end
+
   def update(category)
     old_category = get_by_id(id: category.id)
     @categories.delete(old_category)
