@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+# require all files in the src directory
+Dir[File.join(File.dirname(__FILE__), '../src/**/*.rb')].each { |f| require f }
+
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
