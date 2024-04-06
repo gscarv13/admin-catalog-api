@@ -16,6 +16,8 @@ require 'action_view/railtie'
 require 'action_cable/engine'
 # require "rails/test_unit/railtie"
 
+require 'active_record/connection_adapters/sqlite3_adapter'
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -42,5 +44,10 @@ module AdminCatalogApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Temporary SQLite workaround
+    config.generators do |g|
+      g.orm :active_record, primary_key_type: :uuid
+    end
   end
 end
