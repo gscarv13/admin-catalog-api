@@ -2,19 +2,11 @@
 
 module Application
   module UseCase
-    module Types
-      include Dry.Types
-
-      UUID = Types::String.constrained(
-        format: /\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i
-      )
-    end
-
     class UpdateCategoryRequest < Dry::Struct
-      attribute :id, Types::UUID
-      attribute :name, Types::String.optional.default(nil)
-      attribute :description, Types::String.optional.default(nil)
-      attribute :is_active, Types::Bool.optional.default(nil)
+      attribute :id, Domain::Types::UUID
+      attribute :name, Domain::Types::String.optional.default(nil)
+      attribute :description, Domain::Types::String.optional.default(nil)
+      attribute :is_active, Domain::Types::Bool.optional.default(nil)
     end
 
     class UpdateCategory

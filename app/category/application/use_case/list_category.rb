@@ -2,31 +2,19 @@
 
 module Application
   module UseCase
-    module Types
-      include Dry.Types
-
-      UUID = Types::String.constrained(
-        format: /\A[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\z/i
-      )
-    end
-
     class ListCategoryRequest < Dry::Struct
       include Dry.Types
     end
 
     class CategoryOutput < Dry::Struct
-      include Dry.Types
-
-      attribute :id, Types::String
-      attribute :name, Types::String
-      attribute :description, Types::String
-      attribute :is_active, Types::Bool
+      attribute :id, Domain::Types::String
+      attribute :name, Domain::Types::String
+      attribute :description, Domain::Types::String
+      attribute :is_active, Domain::Types::Bool
     end
 
     class ListCategoryResponse < Dry::Struct
-      include Dry.Types
-
-      attribute :data, Types::Array.of(CategoryOutput)
+      attribute :data, Domain::Types::Array.of(CategoryOutput)
     end
 
     class ListCategory
