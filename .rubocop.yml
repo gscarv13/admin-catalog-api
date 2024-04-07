@@ -1,4 +1,17 @@
 
+AllCops:
+ Exclude:
+    - 'vendor/**/*'
+    - 'log/**/*'
+    - 'tmp/**/*'
+    - 'bin/**/*'
+    - 'public/system/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
+    - 'db/seeds.rb'
+    - 'config/database.yml'
+    - 'config/secrets.yml'
+
 Style/Documentation:
   Enabled: false
 
