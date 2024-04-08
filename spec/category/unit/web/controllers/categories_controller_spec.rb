@@ -91,4 +91,94 @@ RSpec.describe Web::Controllers::Api::CategoriesController, type: :controller do
       expect(response.status).to(eq(404))
     end
   end
+
+  context 'POST #create' do
+    it 'returns 400 when category is invalid' do
+      movie_category = {
+        name: '',
+        description: 'A very niiiiice movie'
+      }
+
+      post :create, params: movie_category
+
+      expect(response.status).to(eq(400))
+    end
+
+    it 'returns 201 when category is valid' do
+      movie_category = {
+        name: 'Moooovie',
+        description: 'A very niiiiice movie'
+      }
+
+      post :create, params: movie_category
+
+      expect(response.status).to(eq(201))
+
+      respository = Infra::Repository::ActiveRecordCategoryRepository.new
+      parsed_body = JSON.parse(response.body)
+
+      expect(parsed_body.fetch('data')).to(have_key('id'))
+
+      response_id = parsed_body.dig('data', 'id')
+      persisted_category = respository.get_by_id(id: response_id)
+      category = Domain::Category.new(
+        id: response_id,
+        name: movie_category[:name],
+        description: movie_category[:description],
+        is_active: true
+      )
+
+      expect(category == persisted_category).to(be(true))
+    end
+  end
+
+  context 'PUT #update' do
+    it 'returns 400 when id is invalid' do
+      put :update, params: { id: 'invalid_id', name: 'TV Show', is_active: false }
+
+      expect(response.status).to(eq(400))
+    end
+
+    it 'returns 204 when category updated' do
+      respository = Infra::Repository::ActiveRecordCategoryRepository.new
+      respository.save(movie_category)
+
+      put :update, params: { id: movie_category.id, name: 'TV Show', is_active: false }
+
+      expect(response.status).to(eq(204))
+
+      persisted_category = respository.get_by_id(id: movie_category.id)
+
+      expect(persisted_category.name).to(eq('TV Show'))
+      expect(persisted_category.description).to(eq(movie_category.description))
+      expect(persisted_category.is_active).to(eq(false))
+    end
+
+    it 'returns 404 when category is not found' do
+      put :update, params: { id: SecureRandom.uuid, name: 'TV Show', is_active: false }
+
+      expect(response.status).to(eq(404))
+    end
+  end
+
+  context 'DELETE #destroy' do
+    it 'returns 400 when id is invalid' do
+      delete :destroy, params: { id: 'invalid_id' }
+
+      expect(response.status).to(eq(400))
+    end
+
+    it 'returns 204 when category deleted' do
+      repository = Infra::Repository::ActiveRecordCategoryRepository.new
+      repository.save(movie_category)
+
+      delete :destroy, params: { id: movie_category.id }
+
+      expect(response.status).to(eq(204))
+      expect do
+        repository.get_by_id(id: movie_category.id)
+      end.to(raise_error(Exceptions::CategoryNotFound,
+                         "Category with id #{movie_category.id} not found"))
+    end
+  end
 end
