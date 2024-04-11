@@ -9,4 +9,6 @@ module Exceptions
       super(message)
     end
   end
+
+  class RelatedCategoriesNotFound < StandardError; end
 end
