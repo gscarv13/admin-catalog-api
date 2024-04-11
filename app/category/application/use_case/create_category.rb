@@ -3,13 +3,13 @@
 module Application
   module UseCase
     class CreateCategoryRequest < Dry::Struct
-      attribute :name, Domain::Types::String
-      attribute :description, Domain::Types::String.optional.default('')
-      attribute :is_active, Domain::Types::Bool.optional.default(true)
+      attribute :name, Types::String
+      attribute :description, Types::String.optional.default('')
+      attribute :is_active, Types::Bool.optional.default(true)
     end
 
     class CreateCategoryResponse < Dry::Struct
-      attribute :id, Domain::Types::UUID
+      attribute :id, Types::UUID
     end
 
     class CreateCategory

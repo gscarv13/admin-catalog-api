@@ -7,14 +7,14 @@ module Application
     end
 
     class CategoryOutput < Dry::Struct
-      attribute :id, Domain::Types::String
-      attribute :name, Domain::Types::String
-      attribute :description, Domain::Types::String
-      attribute :is_active, Domain::Types::Bool
+      attribute :id, Types::String
+      attribute :name, Types::String
+      attribute :description, Types::String
+      attribute :is_active, Types::Bool
     end
 
     class ListCategoryResponse < Dry::Struct
-      attribute :data, Domain::Types::Array.of(CategoryOutput)
+      attribute :data, Types::Array.of(CategoryOutput)
     end
 
     class ListCategory

@@ -3,7 +3,7 @@
 module Application
   module UseCase
     class DeleteCategoryRequest < Dry::Struct
-      attribute :id, Domain::Types::UUID
+      attribute :id, Types::UUID
     end
 
     class DeleteCategory

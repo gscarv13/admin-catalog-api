@@ -3,14 +3,14 @@
 module Application
   module UseCase
     class GetCategoryRequest < Dry::Struct
-      attribute :id, Domain::Types::UUID
+      attribute :id, Types::UUID
     end
 
     class GetCategoryResponse < Dry::Struct
-      attribute :id, Domain::Types::UUID
-      attribute :name, Domain::Types::String
-      attribute :description, Domain::Types::String
-      attribute :is_active, Domain::Types::Bool
+      attribute :id, Types::UUID
+      attribute :name, Types::String
+      attribute :description, Types::String
+      attribute :is_active, Types::Bool
     end
 
     class GetCategory

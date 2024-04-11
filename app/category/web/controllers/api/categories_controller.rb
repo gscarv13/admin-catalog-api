@@ -87,7 +87,7 @@ module Web
         end
 
         def validate_uuid
-          Domain::Types::UUID[params[:id]]
+          Types::UUID[params[:id]]
 
           true
         rescue Dry::Types::ConstraintError
