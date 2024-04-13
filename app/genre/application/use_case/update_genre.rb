@@ -25,11 +25,14 @@ module Application
         genre_is_active = genre.is_active
         genre_is_active = request_dto.is_active if request_dto.is_active
 
+        missing = []
         request_dto.categories.each do |id|
           category = @category_repository.get_by_id(id:)
 
-          raise Exceptions::RelatedCategoriesNotFound.new(id:) if category.nil?
+          missing << id if category.nil?
         end
+
+        raise Exceptions::RelatedCategoriesNotFound.new(ids: missing) unless missing.empty?
 
         genre_categories = genre.categories
         genre_categories = request_dto.categories if request_dto.categories

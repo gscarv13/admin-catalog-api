@@ -19,5 +19,10 @@ module Exceptions
     end
   end
 
-  class RelatedCategoriesNotFound < CategoryNotFound; end
+  class RelatedCategoriesNotFound < StandardError
+    def initialize(ids:)
+      message = "Categories not found: #{ids.join(', ')}"
+      super(message)
+    end
+  end
 end

@@ -54,7 +54,7 @@ RSpec.describe Application::UseCase::UpdateGenre do
 
     expect { use_case.execute(request_dto) }.to(
       raise_error(Exceptions::RelatedCategoriesNotFound,
-                  "Category with id #{unkown_id} not found")
+                  "Categories not found: #{unkown_id}")
     )
   end
 

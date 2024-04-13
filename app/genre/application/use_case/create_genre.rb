@@ -22,7 +22,7 @@ module Application
         categories = @category_repository.list.map(&:id)
 
         missing = request_dto.categories - categories
-        raise Exceptions::RelatedCategoriesNotFound, "Categories not found: #{missing.join(', ')}" unless missing.empty?
+        raise Exceptions::RelatedCategoriesNotFound.new(ids: missing) unless missing.empty?
 
         genre = Domain::Genre.new(
           name: request_dto.name,
