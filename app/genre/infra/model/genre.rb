@@ -2,12 +2,11 @@
 
 module Infra
   module Model
-    class Category < ApplicationRecord
-      has_and_belongs_to_many :genres
+    class Genre < ActiveRecord::Base
+      has_and_belongs_to_many :categories
 
       attribute :id, :string
       attribute :name, :string
-      attribute :description, :string
       attribute :is_active, :boolean
     end
   end

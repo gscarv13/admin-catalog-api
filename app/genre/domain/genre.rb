@@ -2,7 +2,8 @@
 
 module Domain
   class Genre
-    attr_reader :id, :name, :categories, :is_active
+    attr_accessor :name, :categories
+    attr_reader :id, :is_active
 
     def initialize(name:, id: nil, categories: [], is_active: true)
       validate(name)
