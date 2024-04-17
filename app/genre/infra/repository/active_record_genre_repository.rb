@@ -8,7 +8,7 @@ module Infra
         @category_model = category_model || Infra::Model::Category
       end
 
-      def save(genre:)
+      def save(genre)
         categories = genre.categories.map do |id|
           @category_model.find_by(id:) || raise(Exceptions::CategoryNotFound.new(id:))
         end

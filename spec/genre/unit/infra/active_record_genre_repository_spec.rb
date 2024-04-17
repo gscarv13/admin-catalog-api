@@ -10,7 +10,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
 
       expect(Infra::Model::Genre.count).to(eq(0))
 
-      repository.save(genre:)
+      repository.save(genre)
 
       expect(Infra::Model::Genre.count).to(eq(1))
 
@@ -36,7 +36,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
 
       expect(Infra::Model::Genre.count).to(eq(0))
 
-      genre_repository.save(genre:)
+      genre_repository.save(genre)
 
       expect(Infra::Model::Genre.count).to(eq(1))
 
@@ -55,7 +55,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       )
 
       repository = Infra::Repository::ActiveRecordGenreRepository.new
-      repository.save(genre:)
+      repository.save(genre)
 
       persisted_genre = repository.get_by_id(id: genre.id)
 
@@ -73,7 +73,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       genre = Domain::Genre.new(name: 'Fantasy', is_active: true)
 
       repository = Infra::Repository::ActiveRecordGenreRepository.new
-      repository.save(genre:)
+      repository.save(genre)
 
       expect(Infra::Model::Genre.count).to(eq(1))
 
@@ -99,8 +99,8 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       action_genre = Domain::Genre.new(name: 'Action')
       animation_genre = Domain::Genre.new(name: 'Animation')
 
-      repository.save(genre: action_genre)
-      repository.save(genre: animation_genre)
+      repository.save(action_genre)
+      repository.save(animation_genre)
 
       result = repository.list
 
@@ -115,7 +115,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       genre = Domain::Genre.new(name: 'Biography')
 
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
-      genre_repository.save(genre:)
+      genre_repository.save(genre)
 
       current_genre = Infra::Model::Genre.find_by(id: genre.id)
 
