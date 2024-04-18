@@ -33,6 +33,8 @@ module Application
         @genre_repository.save(genre)
 
         CreateGenreResponse.new(id: genre.id)
+      rescue ArgumentError => e
+        raise Exceptions::InvalidGenreData, e.message
       end
     end
   end

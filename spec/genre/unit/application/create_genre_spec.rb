@@ -44,7 +44,7 @@ RSpec.describe Application::UseCase::CreateGenre do
     )
 
     expect { use_case.execute(request_dto) }.to(raise_error(
-                                                  ArgumentError,
+                                                  Exceptions::InvalidGenreData,
                                                   'name must be present'
                                                 ))
   end
