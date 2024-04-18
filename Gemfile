@@ -26,6 +26,7 @@ gem 'puma', '>= 5.0'
 # gem "bcrypt", "~> 3.1.7"
 
 gem 'dry-struct', '>= 1.4.0'
+gem 'dry-validation', '~> 1.10'
 gem 'securerandom', '>= 0.3.1'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -43,7 +44,8 @@ gem 'bootsnap', require: false
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
-
+  gem 'factory_bot_rails'
+  gem 'faker', '~> 3.3', '>= 3.3.1'
   gem 'rspec-rails', '~> 6.1.0'
 end
 
