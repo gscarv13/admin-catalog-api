@@ -36,7 +36,7 @@ module Infra
         nil
       end
 
-      def update(genre:)
+      def update(genre)
         persisted_genre = @genre_model.find_by(id: genre.id)
 
         categories = genre.categories.map do |id|

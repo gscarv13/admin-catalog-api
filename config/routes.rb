@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     scope module: :controllers do
       namespace :api do
         resources :categories, only: %i[index show create update destroy]
+        resources :genres, only: %i[index create update destroy]
       end
     end
   end

@@ -128,7 +128,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       genre.name = 'Mystery'
       genre.categories = [category.id]
 
-      genre_repository.update(genre:)
+      genre_repository.update(genre)
 
       updated_genre = Infra::Model::Genre.find_by(id: genre.id)
 
