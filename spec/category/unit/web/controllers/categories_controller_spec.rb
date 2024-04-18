@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Web::Controllers::Api::CategoriesController, type: :controller do
+RSpec.describe Api::CategoriesController, type: :controller do
   let(:movie_category) do
     Domain::Category.new(
       name: 'Moooovie',

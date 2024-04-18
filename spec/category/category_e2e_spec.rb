@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Web::Controllers::Api::CategoriesController, type: :controller do
+RSpec.describe Api::CategoriesController, type: :controller do
   context 'e2e specs' do
     it 'allow all CRUD operations' do # rubocop:disable Metrics/BlockLength
       # List all categories
