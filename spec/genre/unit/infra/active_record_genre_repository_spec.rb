@@ -8,13 +8,13 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       repository = Infra::Repository::ActiveRecordGenreRepository.new
       genre = Domain::Genre.new(name: 'Adventure')
 
-      expect(Infra::Model::Genre.count).to(eq(0))
+      expect(Genre.count).to(eq(0))
 
       repository.save(genre)
 
-      expect(Infra::Model::Genre.count).to(eq(1))
+      expect(Genre.count).to(eq(1))
 
-      genre_db = Infra::Model::Genre.find_by(id: genre.id)
+      genre_db = Genre.find_by(id: genre.id)
 
       expect(genre_db.id).to(eq(genre.id))
       expect(genre_db.name).to(eq(genre.name))
@@ -34,14 +34,14 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
         categories: [category.id]
       )
 
-      expect(Infra::Model::Genre.count).to(eq(0))
+      expect(Genre.count).to(eq(0))
 
       genre_repository.save(genre)
 
-      expect(Infra::Model::Genre.count).to(eq(1))
+      expect(Genre.count).to(eq(1))
 
-      persisted_category = Infra::Model::Genre.find_by(id: genre.id)
-                                              .categories.first.id
+      persisted_category = Genre.find_by(id: genre.id)
+                                .categories.first.id
 
       expect(persisted_category).to(eq(category.id))
     end
@@ -75,11 +75,11 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       repository = Infra::Repository::ActiveRecordGenreRepository.new
       repository.save(genre)
 
-      expect(Infra::Model::Genre.count).to(eq(1))
+      expect(Genre.count).to(eq(1))
 
       result = repository.delete(id: genre.id)
 
-      expect(Infra::Model::Genre.count).to(eq(0))
+      expect(Genre.count).to(eq(0))
       expect(result).to(eq(nil))
     end
 
@@ -117,7 +117,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
       genre_repository.save(genre)
 
-      current_genre = Infra::Model::Genre.find_by(id: genre.id)
+      current_genre = Genre.find_by(id: genre.id)
 
       expect(current_genre.name).to(eq('Biography'))
 
@@ -130,7 +130,7 @@ RSpec.describe Infra::Repository::ActiveRecordGenreRepository do
 
       genre_repository.update(genre)
 
-      updated_genre = Infra::Model::Genre.find_by(id: genre.id)
+      updated_genre = Genre.find_by(id: genre.id)
 
       expect(updated_genre.id).to(eq(current_genre.id))
       expect(updated_genre.name).to(eq('Mystery'))

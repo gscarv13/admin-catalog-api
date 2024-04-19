@@ -6,7 +6,7 @@ module Infra
       attr_reader :categories
 
       def initialize(model: nil)
-        @model = model || Infra::Model::Category
+        @model = model || Category
       end
 
       def save(category)

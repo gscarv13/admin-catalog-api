@@ -4,8 +4,8 @@ module Infra
   module Repository
     class ActiveRecordGenreRepository < Domain::GenreRepository
       def initialize(genre_model: nil, category_model: nil)
-        @genre_model = genre_model || Infra::Model::Genre
-        @category_model = category_model || Infra::Model::Category
+        @genre_model = genre_model || Genre
+        @category_model = category_model || Category
       end
 
       def save(genre)

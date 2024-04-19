@@ -104,11 +104,11 @@ RSpec.describe Api::GenresController, type: :controller do
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
       genre_repository.save(genre)
 
-      expect(Infra::Model::Genre.count).to(eq(1))
+      expect(Genre.count).to(eq(1))
 
       delete :destroy, params: { id: genre.id }
 
-      expect(Infra::Model::Genre.count).to(eq(0))
+      expect(Genre.count).to(eq(0))
       expect(response.status).to(eq(204))
     end
 

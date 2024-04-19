@@ -13,13 +13,13 @@ RSpec.describe Infra::Repository::ActiveRecordCategoryRepository do
         is_active: true
       )
 
-      expect(Infra::Model::Category.count).to(eq(0))
+      expect(Category.count).to(eq(0))
 
       repository.save(category)
 
-      expect(Infra::Model::Category.count).to(eq(1))
+      expect(Category.count).to(eq(1))
 
-      category_db = Infra::Model::Category.find_by(id: category.id)
+      category_db = Category.find_by(id: category.id)
 
       expect(category_db.name).to(eq(category.name))
       expect(category_db.description).to(eq(category.description))
@@ -60,11 +60,11 @@ RSpec.describe Infra::Repository::ActiveRecordCategoryRepository do
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       repository.save(category)
 
-      expect(Infra::Model::Category.count).to(eq(1))
+      expect(Category.count).to(eq(1))
 
       result = repository.delete(id: category.id)
 
-      expect(Infra::Model::Category.count).to(eq(0))
+      expect(Category.count).to(eq(0))
       expect(result).to(eq(nil))
     end
 
@@ -115,7 +115,7 @@ RSpec.describe Infra::Repository::ActiveRecordCategoryRepository do
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       repository.save(category)
 
-      current_category = Infra::Model::Category.find_by(id: category.id)
+      current_category = Category.find_by(id: category.id)
 
       expect(current_category.name).to(eq('Moooovie'))
       expect(current_category.description).to(eq('A very niiiiice movie'))
@@ -125,7 +125,7 @@ RSpec.describe Infra::Repository::ActiveRecordCategoryRepository do
 
       repository.update(category)
 
-      updated_category = Infra::Model::Category.find_by(id: category.id)
+      updated_category = Category.find_by(id: category.id)
 
       expect(updated_category.id).to(eq(current_category.id))
       expect(updated_category.name).to(eq('TV Show'))
