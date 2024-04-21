@@ -16,6 +16,8 @@ require 'action_view/railtie'
 require 'action_cable/engine'
 # require "rails/test_unit/railtie"
 
+require 'debug'
+
 require 'active_record/connection_adapters/sqlite3_adapter'
 
 # Require the gems listed in Gemfile, including any gems
@@ -44,6 +46,17 @@ module AdminCatalogApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # debugger
+
+    # Add @core at autoload path
+    config.autoload_paths << "#{config.root}/core/shared"
+    config.autoload_paths << "#{config.root}/core/category"
+    config.autoload_paths << "#{config.root}/core/genre"
+
+    config.eager_load_paths << "#{config.root}/core/shared"
+    config.eager_load_paths << "#{config.root}/core/category"
+    config.eager_load_paths << "#{config.root}/core/genre"
 
     # Temporary SQLite workaround
     config.generators do |g|

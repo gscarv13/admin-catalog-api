@@ -10,12 +10,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  scope module: :web do
-    scope module: :controllers do
-      namespace :api do
-        resources :categories, only: %i[index show create update destroy]
-        resources :genres, only: %i[index create update destroy]
-      end
-    end
+  namespace :api do
+    resources :categories, only: %i[index show create update destroy]
+    resources :genres, only: %i[index create update destroy]
   end
 end
