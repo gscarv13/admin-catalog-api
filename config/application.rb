@@ -53,10 +53,12 @@ module AdminCatalogApi
     config.autoload_paths << "#{config.root}/core/shared"
     config.autoload_paths << "#{config.root}/core/category"
     config.autoload_paths << "#{config.root}/core/genre"
+    config.autoload_paths << "#{config.root}/core/cast_member"
 
     config.eager_load_paths << "#{config.root}/core/shared"
     config.eager_load_paths << "#{config.root}/core/category"
     config.eager_load_paths << "#{config.root}/core/genre"
+    config.eager_load_paths << "#{config.root}/core/cast_member"
 
     # Temporary SQLite workaround
     config.generators do |g|
