@@ -25,4 +25,6 @@ module Exceptions
       super(message)
     end
   end
+
+  class InvalidCastMemberData < StandardError; end
 end
