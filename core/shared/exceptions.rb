@@ -26,5 +26,12 @@ module Exceptions
     end
   end
 
+  class CastMemberNotFound < StandardError
+    def initialize(id:)
+      message = "Cast member with id #{id} not found"
+      super(message)
+    end
+  end
+
   class InvalidCastMemberData < StandardError; end
 end
