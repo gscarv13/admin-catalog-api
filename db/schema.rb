@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_13_234734) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_225753) do
+  create_table "cast_members", id: :string, force: :cascade do |t|
+    t.string "name"
+    t.integer "role_type", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "categories", id: :string, force: :cascade do |t|
     t.string "name"
     t.text "description"

@@ -47,8 +47,6 @@ module AdminCatalogApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    # debugger
-
     # Add @core at autoload path
     config.autoload_paths << "#{config.root}/core/shared"
     config.autoload_paths << "#{config.root}/core/category"
