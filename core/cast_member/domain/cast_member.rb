@@ -19,7 +19,8 @@ module Domain
       'director' => 'director'
     }.freeze
 
-    attr_reader :id, :name, :type
+    attr_accessor :name, :type
+    attr_reader :id
 
     def initialize(name:, type:, id: nil)
       validate(id:, name:, type:)
