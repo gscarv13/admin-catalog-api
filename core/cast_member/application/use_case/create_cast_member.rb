@@ -12,8 +12,8 @@ module Application
     end
 
     class CreateCastMember
-      def initialize(repository:)
-        @repository = repository
+      def initialize(cast_member_repository:)
+        @cast_member_repository = cast_member_repository
       end
 
       def execute(request_dto)
@@ -22,7 +22,7 @@ module Application
           type: request_dto.type
         )
 
-        @repository.save(category)
+        @cast_member_repository.save(category)
 
         CreateCastMemberResponse.new(id: category.id)
       rescue ArgumentError => e

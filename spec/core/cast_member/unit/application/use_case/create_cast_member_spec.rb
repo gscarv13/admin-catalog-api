@@ -6,7 +6,7 @@ RSpec.describe Application::UseCase::CreateCastMember do
   let(:repository_double) { instance_double(Domain::CastMemberRepository, save: nil) }
 
   it 'should throw ArgumentError if name is missing' do
-    use_case = Application::UseCase::CreateCastMember.new(repository: repository_double)
+    use_case = Application::UseCase::CreateCastMember.new(cast_member_repository: repository_double)
     request_dto = Application::UseCase::CreateCastMemberRequest.new(name: '', type: 'actor')
 
     expect { use_case.execute(request_dto) }
@@ -14,7 +14,7 @@ RSpec.describe Application::UseCase::CreateCastMember do
   end
 
   it 'should throw ArgumentError if type is missing' do
-    use_case = Application::UseCase::CreateCastMember.new(repository: repository_double)
+    use_case = Application::UseCase::CreateCastMember.new(cast_member_repository: repository_double)
     request_dto = Application::UseCase::CreateCastMemberRequest.new(name: 'Adel', type: '')
 
     expect { use_case.execute(request_dto) }
@@ -25,7 +25,7 @@ RSpec.describe Application::UseCase::CreateCastMember do
     uuid = '123e4567-e89b-12d3-a456-426614174000'
     allow(SecureRandom).to receive(:uuid).and_return(uuid)
 
-    use_case = Application::UseCase::CreateCastMember.new(repository: repository_double)
+    use_case = Application::UseCase::CreateCastMember.new(cast_member_repository: repository_double)
     request_dto = Application::UseCase::CreateCastMemberRequest.new(
       name: 'Kurtz',
       type: 'actor'

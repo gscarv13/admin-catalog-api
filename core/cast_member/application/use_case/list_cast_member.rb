@@ -20,7 +20,7 @@ module Application
         @cast_member_repository = cast_member_repository
       end
 
-      def execute
+      def execute(_request_dto)
         cast_members = @cast_member_repository.list
 
         data = cast_members.map do |cast_member|

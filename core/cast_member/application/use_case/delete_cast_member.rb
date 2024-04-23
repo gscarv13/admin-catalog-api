@@ -7,16 +7,16 @@ module Application
     end
 
     class DeleteCastMember
-      def initialize(repository:)
-        @repository = repository
+      def initialize(cast_member_repository:)
+        @cast_member_repository = cast_member_repository
       end
 
       def execute(request_dto)
-        cast_member = @repository.get_by_id(id: request_dto.id)
+        cast_member = @cast_member_repository.get_by_id(id: request_dto.id)
 
         raise Exceptions::CastMemberNotFound.new(id: request_dto.id) if cast_member.nil?
 
-        @repository.delete(id: cast_member.id)
+        @cast_member_repository.delete(id: cast_member.id)
       end
     end
   end

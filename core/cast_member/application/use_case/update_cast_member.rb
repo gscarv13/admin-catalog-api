@@ -9,12 +9,12 @@ module Application
     end
 
     class UpdateCastMember
-      def initialize(repository)
-        @repository = repository
+      def initialize(cast_member_repository:)
+        @cast_member_repository = cast_member_repository
       end
 
       def execute(request_dto)
-        cast_member = @repository.get_by_id(id: request_dto.id)
+        cast_member = @cast_member_repository.get_by_id(id: request_dto.id)
         raise Exceptions::CastMemberNotFound.new(id: request_dto.id) if cast_member.nil?
 
         cast_member_name = cast_member.name
@@ -29,7 +29,7 @@ module Application
           type: cast_member_type
         )
 
-        @repository.update(updated_cast_member)
+        @cast_member_repository.update(updated_cast_member)
       rescue ArgumentError => e
         raise(Exceptions::InvalidCastMemberData, e)
       end
