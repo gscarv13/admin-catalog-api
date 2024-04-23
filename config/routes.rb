@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :categories, only: %i[index show create update destroy]
     resources :genres, only: %i[index create update destroy]
+    resources :cast_members, only: %i[index create update destroy]
   end
 end
