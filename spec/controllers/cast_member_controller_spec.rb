@@ -26,12 +26,12 @@ RSpec.describe Api::CastMembersController, type: :controller do
                                                 {
                                                   'id' => actor.id,
                                                   'name' => 'Adel',
-                                                  'type' => 'actor'
+                                                  'type' => 'ACTOR'
                                                 },
                                                 {
                                                   'id' => director.id,
                                                   'name' => 'Rosalin',
-                                                  'type' => 'director'
+                                                  'type' => 'DIRECTOR'
                                                 }
                                               ] }))
     end
@@ -54,7 +54,7 @@ RSpec.describe Api::CastMembersController, type: :controller do
 
       expect(persisted_cast_member.id).to(eq(cast_member_id))
       expect(persisted_cast_member.name).to(eq('Tink'))
-      expect(persisted_cast_member.type).to(eq('director'))
+      expect(persisted_cast_member.type).to(eq('DIRECTOR'))
     end
 
     it 'should return 422 when CastMember params are invalid' do

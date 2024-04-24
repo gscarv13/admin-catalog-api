@@ -4,5 +4,5 @@ class CastMember < ApplicationRecord
   attribute :id, :string
   attribute :name, :string
 
-  enum role_type: { actor: 0, director: 1 }
+  enum role_type: { ACTOR: 0, DIRECTOR: 1 }
 end

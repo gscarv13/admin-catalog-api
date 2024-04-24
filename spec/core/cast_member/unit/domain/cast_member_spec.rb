@@ -64,7 +64,7 @@ RSpec.describe Domain::CastMember do
       expect(cast_member.to_h).to eq({
                                        id: cast_member.id,
                                        name: 'John Doe',
-                                       type: 'actor'
+                                       type: 'ACTOR'
                                      })
     end
   end

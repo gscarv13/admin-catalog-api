@@ -10,13 +10,15 @@ module Domain
       end
 
       rule(:type) do
-        key.failure(text: 'must be either `actor` or `director`') if TYPE[values[:type]].nil?
+        if values[:type].nil? || TYPE[values[:type].downcase].nil?
+          key.failure(text: 'must be either `actor` or `director`')
+        end
       end
     end
 
     TYPE = {
-      'actor' => 'actor',
-      'director' => 'director'
+      'actor' => 'ACTOR',
+      'director' => 'DIRECTOR'
     }.freeze
 
     attr_accessor :name, :type
@@ -27,7 +29,7 @@ module Domain
 
       @id = id || SecureRandom.uuid
       @name = name
-      @type = TYPE[type]
+      @type = TYPE[type.downcase]
     end
 
     def update(name:, type: @type)
@@ -56,12 +58,17 @@ module Domain
     private
 
     def validate(**args)
-      result = Contract.new.call(args, type: TYPE[args[:type]])
-
+      result = Contract.new.call(args, type: normalize_type(args[:type]))
       return if result.success?
 
       message = result.errors.to_h.map { |k, v| "#{k} #{v}" }.join(', ')
       raise ArgumentError, message
+    end
+
+    def normalize_type(type)
+      type_key = type&.downcase
+
+      TYPE[type_key]
     end
   end
 end
