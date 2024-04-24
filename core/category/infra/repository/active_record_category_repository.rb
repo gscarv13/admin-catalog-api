@@ -2,30 +2,50 @@
 
 module Infra
   module Repository
+    class CategoryMapper
+      def initialize(model: nil)
+        @model = model || Category
+      end
+
+      def to_entity(model)
+        Domain::Category.new(
+          id: model.id,
+          name: model.name,
+          description: model.description,
+          is_active: model.is_active
+        )
+      end
+
+      def to_model(entity)
+        @model.new(
+          id: entity.id,
+          name: entity.name,
+          description: entity.description,
+          is_active: entity.is_active
+        )
+      end
+    end
+
     class ActiveRecordCategoryRepository < Domain::CategoryRepository
       attr_reader :categories
 
       def initialize(model: nil)
         @model = model || Category
+        @mapper = CategoryMapper.new(model: @model)
       end
 
       def save(category)
-        @model.create!(category.to_h)
+        category_model = @mapper.to_model(category)
+        category_model.save!
 
         nil
       end
 
       def get_by_id(id:)
         result = @model.find_by(id:)
-
         raise Exceptions::CategoryNotFound.new(id:) if result.nil?
 
-        Domain::Category.new(
-          id: result.id,
-          name: result.name,
-          description: result.description,
-          is_active: result.is_active
-        )
+        @mapper.to_entity(result)
       end
 
       def delete(id:)
@@ -38,14 +58,7 @@ module Infra
       def list
         categories = @model.all
 
-        categories.map do |category|
-          Domain::Category.new(
-            id: category.id,
-            name: category.name,
-            description: category.description,
-            is_active: category.is_active
-          )
-        end
+        categories.map { |category| @mapper.to_entity(category) }
       end
 
       def update(category)

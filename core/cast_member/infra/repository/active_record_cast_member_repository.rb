@@ -2,28 +2,44 @@
 
 module Infra
   module Repository
-    class ActiveRecordCastMemberRepository < Domain::CastMemberRepository
+    class CastMemberMapper
       def initialize(cast_member_model: nil)
         @cast_member_model = cast_member_model || CastMember
       end
 
-      def save(cast_member)
-        params = cast_member.to_h.merge(role_type: cast_member.type)
-        params.delete(:type)
+      def to_entity(model)
+        Domain::CastMember.new(
+          id: model.id,
+          name: model.name,
+          type: model.role_type
+        )
+      end
 
-        @cast_member_model.create!(**params)
+      def to_model(entity)
+        @cast_member_model.new(
+          id: entity.id,
+          name: entity.name,
+          role_type: entity.type
+        )
+      end
+    end
+
+    class ActiveRecordCastMemberRepository < Domain::CastMemberRepository
+      def initialize(cast_member_model: nil)
+        @cast_member_model = cast_member_model || CastMember
+        @mapper = CastMemberMapper.new(cast_member_model: @cast_member_model)
+      end
+
+      def save(cast_member)
+        new_record = @mapper.to_model(cast_member)
+        new_record.save!
       end
 
       def get_by_id(id:)
         record = @cast_member_model.find_by(id:)
-
         return if record.nil?
 
-        Domain::CastMember.new(
-          id: record.id,
-          name: record.name,
-          type: record.role_type
-        )
+        @mapper.to_entity(record)
       end
 
       def delete(id:)
@@ -44,13 +60,7 @@ module Infra
       def list
         records = @cast_member_model.all
 
-        records.map do |record|
-          Domain::CastMember.new(
-            id: record.id,
-            name: record.name,
-            type: record.role_type
-          )
-        end
+        records.map { |record| @mapper.to_entity(record) }
       end
     end
   end

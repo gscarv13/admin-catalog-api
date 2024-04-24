@@ -2,31 +2,52 @@
 
 module Infra
   module Repository
-    class ActiveRecordGenreRepository < Domain::GenreRepository
+    class GenreMapper
       def initialize(genre_model: nil, category_model: nil)
         @genre_model = genre_model || Genre
         @category_model = category_model || Category
       end
 
-      def save(genre)
-        categories = genre.categories.map do |id|
+      def to_entity(model)
+        Domain::Genre.new(
+          id: model.id,
+          name: model.name,
+          categories: model.categories.pluck(:id),
+          is_active: model.is_active
+        )
+      end
+
+      def to_model(entity)
+        categories = entity.categories.map do |id|
           @category_model.find_by(id:) || raise(Exceptions::CategoryNotFound.new(id:))
         end
 
-        @genre_model.create!(**genre.to_h, categories:)
+        @genre_model.new(
+          id: entity.id,
+          name: entity.name,
+          categories:,
+          is_active: entity.is_active
+        )
+      end
+    end
+
+    class ActiveRecordGenreRepository < Domain::GenreRepository
+      def initialize(genre_model: nil, category_model: nil)
+        @genre_model = genre_model || Genre
+        @category_model = category_model || Category
+        @mapper = GenreMapper.new(genre_model: @genre_model, category_model: @category_model)
+      end
+
+      def save(genre)
+        genre_record = @mapper.to_model(genre)
+        genre_record.save!
       end
 
       def get_by_id(id:)
         record = @genre_model.find_by(id:)
-
         return if record.nil?
 
-        Domain::Genre.new(
-          id: record.id,
-          name: record.name,
-          categories: record.categories.pluck(:id),
-          is_active: record.is_active
-        )
+        @mapper.to_entity(record)
       end
 
       def delete(id:)
@@ -49,14 +70,7 @@ module Infra
       def list
         records = @genre_model.all
 
-        records.map do |record|
-          Domain::Genre.new(
-            id: record.id,
-            name: record.name,
-            categories: record.categories.pluck(:id),
-            is_active: record.is_active
-          )
-        end
+        records.map { |record| @mapper.to_entity(record) }
       end
     end
   end
