@@ -2,7 +2,7 @@
 
 module Application
   module UseCase
-    class UpdateCastMemberRequest < Dry::Struct
+    class UpdateCastMemberRequest < ApplicationStruct
       attribute :id, Types::UUID
       attribute :name, Types::String
       attribute :type, Types::String

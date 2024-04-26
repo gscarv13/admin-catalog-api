@@ -1,16 +1,16 @@
 module Application
   module UseCase
-    class ListGenreRequest < Dry::Struct
+    class ListGenreRequest < ApplicationStruct
     end
 
-    class GenreOutput < Dry::Struct
+    class GenreOutput < ApplicationStruct
       attribute :id, Types::UUID
       attribute :name, Types::String
       attribute :is_active, Types::Bool
       attribute :categories, Types::Array.of(Types::UUID)
     end
 
-    class ListGenreResponse < Dry::Struct
+    class ListGenreResponse < ApplicationStruct
       attribute :data, Types::Array.of(GenreOutput)
     end
 

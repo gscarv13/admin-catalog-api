@@ -2,7 +2,7 @@
 
 module Application
   module UseCase
-    class DeleteCastMemberRequest < Dry::Struct
+    class DeleteCastMemberRequest < ApplicationStruct
       attribute :id, Types::UUID
     end
 

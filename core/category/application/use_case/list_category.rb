@@ -2,7 +2,7 @@
 
 module Application
   module UseCase
-    class ListCategoryRequest < Dry::Struct
+    class ListCategoryRequest < ApplicationStruct
       transform_types do |type|
         if type.default?
           type.constructor do |value|
@@ -18,20 +18,20 @@ module Application
       attribute :page_size, Types::Integer.default(10)
     end
 
-    class CategoryOutput < Dry::Struct
+    class CategoryOutput < ApplicationStruct
       attribute :id, Types::String
       attribute :name, Types::String
       attribute :description, Types::String
       attribute :is_active, Types::Bool
     end
 
-    class ListCategoryMeta < Dry::Struct
+    class ListCategoryMeta < ApplicationStruct
       attribute :current_page, Types::Integer
       attribute :page_size, Types::Integer
       attribute :total, Types::Integer.optional
     end
 
-    class ListCategoryResponse < Dry::Struct
+    class ListCategoryResponse < ApplicationStruct
       attribute :data, Types::Array.of(CategoryOutput)
 
       attribute :meta, Types::Hash.schema(

@@ -2,12 +2,12 @@
 
 module Application
   module UseCase
-    class CreateCastMemberRequest < Dry::Struct
+    class CreateCastMemberRequest < ApplicationStruct
       attribute :name, Types::String
       attribute :type, Types::String
     end
 
-    class CreateCastMemberResponse < Dry::Struct
+    class CreateCastMemberResponse < ApplicationStruct
       attribute :id, Types::UUID
     end
 

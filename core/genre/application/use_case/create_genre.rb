@@ -2,13 +2,13 @@
 
 module Application
   module UseCase
-    class CreateGenreRequest < Dry::Struct
+    class CreateGenreRequest < ApplicationStruct
       attribute :name, Types::String
       attribute :is_active, Types::Bool.optional.default(true)
       attribute :categories, Types::Array.optional.default([])
     end
 
-    class CreateGenreResponse < Dry::Struct
+    class CreateGenreResponse < ApplicationStruct
       attribute :id, Types::UUID
     end
 

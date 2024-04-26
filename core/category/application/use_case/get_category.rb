@@ -2,11 +2,11 @@
 
 module Application
   module UseCase
-    class GetCategoryRequest < Dry::Struct
+    class GetCategoryRequest < ApplicationStruct
       attribute :id, Types::UUID
     end
 
-    class GetCategoryResponse < Dry::Struct
+    class GetCategoryResponse < ApplicationStruct
       attribute :id, Types::UUID
       attribute :name, Types::String
       attribute :description, Types::String

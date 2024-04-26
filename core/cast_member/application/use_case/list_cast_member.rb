@@ -2,16 +2,16 @@
 
 module Application
   module UseCase
-    class ListCastMemberRequest < Dry::Struct
+    class ListCastMemberRequest < ApplicationStruct
     end
 
-    class CastMemberOutput < Dry::Struct
+    class CastMemberOutput < ApplicationStruct
       attribute :id, Types::UUID
       attribute :name, Types::String
       attribute :type, Types::String
     end
 
-    class ListCastMemberResponse < Dry::Struct
+    class ListCastMemberResponse < ApplicationStruct
       attribute :data, Types::Array.of(CastMemberOutput)
     end
 
