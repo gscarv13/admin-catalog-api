@@ -14,7 +14,7 @@ RSpec.describe 'UpdateCategory integration test' do
     repository.save(category)
     use_case = Application::UseCase::UpdateCategory.new(repository:)
 
-    request_dto = Application::UseCase::UpdateCategoryRequest.new(
+    request_dto = Application::Dto::UpdateCategoryInput.new(
       id: category.id,
       name: 'TV Show',
       description: 'A very thrilling tv show'

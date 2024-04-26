@@ -2,17 +2,6 @@
 
 module Application
   module UseCase
-    class GetCategoryRequest < ApplicationStruct
-      attribute :id, Types::UUID
-    end
-
-    class GetCategoryResponse < ApplicationStruct
-      attribute :id, Types::UUID
-      attribute :name, Types::String
-      attribute :description, Types::String
-      attribute :is_active, Types::Bool
-    end
-
     class GetCategory
       def initialize(repository:)
         @repository = repository
@@ -23,7 +12,7 @@ module Application
 
         raise Exceptions::CategoryNotFound.new(id: request_dto.id) if category.nil?
 
-        GetCategoryResponse.new(
+        Dto::GetCategoryOutput.new(
           id: category.id,
           name: category.name,
           description: category.description,

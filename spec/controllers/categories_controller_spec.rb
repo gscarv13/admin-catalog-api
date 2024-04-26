@@ -22,7 +22,12 @@ RSpec.describe Api::CategoriesController, type: :controller do
     it 'should return empty list when there are no categories' do
       get :index
 
-      expect(JSON.parse(response.body)).to(eq({ 'data' => [] }))
+      expect(JSON.parse(response.body)).to(
+        eq({
+             'meta' => { 'current_page' => 1, 'page_size' => 10, 'total' => 0 },
+             'data' => []
+           })
+      )
       expect(response.status).to(eq(200))
     end
 
@@ -34,6 +39,7 @@ RSpec.describe Api::CategoriesController, type: :controller do
       get :index
 
       expected_data = {
+        'meta' => { 'current_page' => 1, 'page_size' => 10, 'total' => 2 },
         'data' => [
           {
             'id' => movie_category.id,

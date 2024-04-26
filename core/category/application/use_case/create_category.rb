@@ -2,16 +2,6 @@
 
 module Application
   module UseCase
-    class CreateCategoryRequest < ApplicationStruct
-      attribute :name, Types::String
-      attribute :description, Types::String.optional.default('')
-      attribute :is_active, Types::Bool.optional.default(true)
-    end
-
-    class CreateCategoryResponse < ApplicationStruct
-      attribute :id, Types::UUID
-    end
-
     class CreateCategory
       def initialize(repository:)
         @repository = repository
@@ -26,7 +16,7 @@ module Application
 
         @repository.save(category)
 
-        CreateCategoryResponse.new(id: category.id)
+        Dto::CreateCategoryOutput.new(id: category.id)
       rescue ArgumentError => e
         raise(Exceptions::InvalidCategoryData, e)
       end

@@ -13,7 +13,7 @@ RSpec.describe Application::UseCase::GetCategory do
     repository_double = instance_double(Domain::CategoryRepository, get_by_id: category)
 
     use_case = Application::UseCase::GetCategory.new(repository: repository_double)
-    request_dto = Application::UseCase::GetCategoryRequest.new(id: uuid)
+    request_dto = Application::Dto::GetCategoryInput.new(id: uuid)
     response_dto = use_case.execute(request_dto)
 
     expect(response_dto.id).to(eq(uuid))
@@ -28,7 +28,7 @@ RSpec.describe Application::UseCase::GetCategory do
     repository_double = instance_double(Domain::CategoryRepository, get_by_id: nil)
 
     use_case = Application::UseCase::GetCategory.new(repository: repository_double)
-    request_dto = Application::UseCase::GetCategoryRequest.new(id: SecureRandom.uuid)
+    request_dto = Application::Dto::GetCategoryInput.new(id: SecureRandom.uuid)
 
     expect { use_case.execute(request_dto) }
       .to(raise_error do |exception|

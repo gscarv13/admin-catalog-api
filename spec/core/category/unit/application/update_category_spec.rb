@@ -18,7 +18,7 @@ RSpec.describe Application::UseCase::UpdateCategory do
 
     use_case = Application::UseCase::UpdateCategory.new(repository:)
 
-    request_dto = Application::UseCase::UpdateCategoryRequest.new(
+    request_dto = Application::Dto::UpdateCategoryInput.new(
       id: category.id,
       name: 'TV Show'
     )
@@ -45,7 +45,7 @@ RSpec.describe Application::UseCase::UpdateCategory do
 
     use_case = Application::UseCase::UpdateCategory.new(repository:)
 
-    request_dto = Application::UseCase::UpdateCategoryRequest.new(
+    request_dto = Application::Dto::UpdateCategoryInput.new(
       id: category.id,
       description: 'A not-so-nice movie'
     )
@@ -73,7 +73,7 @@ RSpec.describe Application::UseCase::UpdateCategory do
 
     use_case = Application::UseCase::UpdateCategory.new(repository:)
 
-    request_dto = Application::UseCase::UpdateCategoryRequest.new(
+    request_dto = Application::Dto::UpdateCategoryInput.new(
       id: category.id,
       is_active: true
     )
@@ -99,7 +99,7 @@ RSpec.describe Application::UseCase::UpdateCategory do
 
     use_case = Application::UseCase::UpdateCategory.new(repository:)
 
-    request_dto = Application::UseCase::UpdateCategoryRequest.new(
+    request_dto = Application::Dto::UpdateCategoryInput.new(
       id: category.id,
       is_active: false
     )

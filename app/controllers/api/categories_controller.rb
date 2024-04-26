@@ -10,7 +10,7 @@ module Api
 
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::ListCategory.new(repository:)
-      input = Application::UseCase::ListCategoryRequest.new(order_by:, page:, page_size:)
+      input = Application::Dto::ListCategoryInput.new(order_by:, page:, page_size:)
       output = use_case.execute(input)
 
       render json: {
@@ -25,7 +25,7 @@ module Api
 
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::GetCategory.new(repository:)
-      input = Application::UseCase::GetCategoryRequest.new(id: params[:id])
+      input = Application::Dto::GetCategoryInput.new(id: params[:id])
       output = use_case.execute(input)
 
       render json: {
@@ -39,7 +39,7 @@ module Api
     def create
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::CreateCategory.new(repository:)
-      input = Application::UseCase::CreateCategoryRequest.new(create_params)
+      input = Application::Dto::CreateCategoryInput.new(create_params)
       output = use_case.execute(input)
 
       render json: { data: output }, status: :created
@@ -53,7 +53,7 @@ module Api
 
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::UpdateCategory.new(repository:)
-      input = Application::UseCase::UpdateCategoryRequest.new(update_params)
+      input = Application::Dto::UpdateCategoryInput.new(update_params)
       use_case.execute(input)
 
       head :no_content
@@ -66,7 +66,7 @@ module Api
 
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::DeleteCategory.new(repository:)
-      input = Application::UseCase::DeleteCategoryRequest.new(id: params[:id])
+      input = Application::Dto::DeleteCategoryInput.new(id: params[:id])
       use_case.execute(input)
 
       head :no_content

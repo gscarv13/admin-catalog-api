@@ -2,10 +2,6 @@
 
 module Application
   module UseCase
-    class DeleteCategoryRequest < ApplicationStruct
-      attribute :id, Types::UUID
-    end
-
     class DeleteCategory
       def initialize(repository:)
         @repository = repository

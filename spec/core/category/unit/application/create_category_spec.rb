@@ -10,7 +10,7 @@ RSpec.describe Application::UseCase::CreateCategory do
     allow(SecureRandom).to receive(:uuid).and_return(uuid)
 
     use_case = Application::UseCase::CreateCategory.new(repository: repository_double)
-    request_dto = Application::UseCase::CreateCategoryRequest.new(
+    request_dto = Application::Dto::CreateCategoryInput.new(
       name: 'Moooovie',
       description: 'A very niiiiice movie',
       is_active: true
@@ -24,7 +24,7 @@ RSpec.describe Application::UseCase::CreateCategory do
 
   it 'should throw ArgumentError if name is missing' do
     use_case = Application::UseCase::CreateCategory.new(repository: repository_double)
-    request_dto = Application::UseCase::CreateCategoryRequest.new(name: '')
+    request_dto = Application::Dto::CreateCategoryInput.new(name: '')
 
     expect { use_case.execute(request_dto) }
       .to(raise_error(Exceptions::InvalidCategoryData, 'name must be present'))

@@ -21,7 +21,7 @@ RSpec.describe 'DeleteCategory integration test' do
     repository.save(tvshow_category)
 
     use_case = Application::UseCase::DeleteCategory.new(repository:)
-    request_dto = Application::UseCase::DeleteCategoryRequest.new(id: movie_category.id)
+    request_dto = Application::Dto::DeleteCategoryInput.new(id: movie_category.id)
 
     expect(repository.get_by_id(id: movie_category.id)).to_not(be_nil)
 
