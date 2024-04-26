@@ -14,7 +14,7 @@ RSpec.describe Application::UseCase::CreateGenre do
     genre_repository = instance_double(Domain::GenreRepository, save: nil)
 
     not_found_id = SecureRandom.uuid
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: 'Horror',
       categories: [not_found_id]
     )
@@ -33,7 +33,7 @@ RSpec.describe Application::UseCase::CreateGenre do
   it 'raises an error when genre is invalid' do
     genre_repository = instance_double(Domain::GenreRepository, save: nil)
 
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: '',
       categories: [category.id, category2.id]
     )
@@ -52,7 +52,7 @@ RSpec.describe Application::UseCase::CreateGenre do
   it 'saves when genre is valid' do
     genre_repository = instance_double(Domain::GenreRepository, save: nil)
 
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: 'Action',
       categories: [category.id, category2.id]
     )
@@ -74,7 +74,7 @@ RSpec.describe Application::UseCase::CreateGenre do
                                 ))
 
     expect(response_dto)
-      .to(eq(Application::UseCase::CreateGenreResponse.new(
+      .to(eq(Application::Dto::CreateGenreOutput.new(
                id: response_dto.id
              )))
   end

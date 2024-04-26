@@ -2,10 +2,6 @@
 
 module Application
   module UseCase
-    class DeleteGenreRequest < ApplicationStruct
-      attribute :id, Types::UUID
-    end
-
     class DeleteGenre
       def initialize(genre_repository:)
         @genre_repository = genre_repository

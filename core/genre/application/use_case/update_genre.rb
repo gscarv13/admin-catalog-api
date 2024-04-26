@@ -2,13 +2,6 @@
 
 module Application
   module UseCase
-    class UpdateGenreRequest < ApplicationStruct
-      attribute :id, Types::UUID
-      attribute :name, Types::String
-      attribute :categories, Types::Array.of(Types::UUID)
-      attribute :is_active, Types::Bool
-    end
-
     class UpdateGenre
       def initialize(genre_repository:, category_repository:)
         @genre_repository = genre_repository

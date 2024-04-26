@@ -16,7 +16,7 @@ RSpec.describe 'Application::UseCase::CreateGenre integration specs' do
 
   it 'raises an error when category id does not exists' do
     not_found_id = SecureRandom.uuid
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: 'Horror',
       categories: [not_found_id]
     )
@@ -33,7 +33,7 @@ RSpec.describe 'Application::UseCase::CreateGenre integration specs' do
   end
 
   it 'raises an error when genre is invalid' do
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: '',
       categories: [category.id, category2.id]
     )
@@ -50,7 +50,7 @@ RSpec.describe 'Application::UseCase::CreateGenre integration specs' do
   end
 
   it 'saves when genre is valid' do
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: 'Action',
       categories: [category.id, category2.id]
     )
@@ -63,7 +63,7 @@ RSpec.describe 'Application::UseCase::CreateGenre integration specs' do
     response_dto = use_case.execute(request_dto)
 
     expect(response_dto)
-      .to(eq(Application::UseCase::CreateGenreResponse.new(
+      .to(eq(Application::Dto::CreateGenreOutput.new(
                id: response_dto.id
              )))
 
@@ -76,7 +76,7 @@ RSpec.describe 'Application::UseCase::CreateGenre integration specs' do
   end
 
   it 'saves genre when valid but categories is empty' do
-    request_dto = Application::UseCase::CreateGenreRequest.new(
+    request_dto = Application::Dto::CreateGenreInput.new(
       name: 'Action',
       categories: []
     )
@@ -89,7 +89,7 @@ RSpec.describe 'Application::UseCase::CreateGenre integration specs' do
     response_dto = use_case.execute(request_dto)
 
     expect(response_dto)
-      .to(eq(Application::UseCase::CreateGenreResponse.new(
+      .to(eq(Application::Dto::CreateGenreOutput.new(
                id: response_dto.id
              )))
 
