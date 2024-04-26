@@ -4,13 +4,18 @@ module Api
   class CategoriesController < ApplicationController
     # GET /api/categories
     def index
+      order_by = params.fetch('order_by', nil)
+      page = params.fetch('page', nil)
+      page_size = params.fetch('page_size', nil)
+
       repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::ListCategory.new(repository:)
-      input = Application::UseCase::ListCategoryRequest
+      input = Application::UseCase::ListCategoryRequest.new(order_by:, page:, page_size:)
       output = use_case.execute(input)
 
       render json: {
-        data: output.data
+        data: output.data,
+        meta: output.meta
       }
     end
 

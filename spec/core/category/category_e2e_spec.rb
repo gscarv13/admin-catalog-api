@@ -9,7 +9,12 @@ RSpec.describe Api::CategoriesController, type: :controller do
       get :index
 
       expect(response.status).to(eq(200))
-      expect(JSON.parse(response.body)).to(eq({ 'data' => [] }))
+      expect(JSON.parse(response.body)).to(
+        eq({
+             'meta' => { 'current_page' => 1, 'page_size' => 10, 'total' => 0 },
+             'data' => []
+           })
+      )
 
       category = {
         name: 'Moooovie',
@@ -36,6 +41,7 @@ RSpec.describe Api::CategoriesController, type: :controller do
       expect(response.status).to(eq(200))
       expect(JSON.parse(response.body))
         .to(eq({
+                 'meta' => { 'current_page' => 1, 'page_size' => 10, 'total' => 1 },
                  'data' => [
                    {
                      'id' => created_id,
@@ -78,7 +84,12 @@ RSpec.describe Api::CategoriesController, type: :controller do
       # Verify if category was deleted
       get :index
       expect(response.status).to(eq(200))
-      expect(JSON.parse(response.body)).to(eq({ 'data' => [] }))
+      expect(JSON.parse(response.body)).to(
+        eq({
+             'meta' => { 'current_page' => 1, 'page_size' => 10, 'total' => 0 },
+             'data' => []
+           })
+      )
     end
   end
 end

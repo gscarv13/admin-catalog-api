@@ -27,6 +27,7 @@ module Infra
     end
 
     class ActiveRecordCategoryRepository < Domain::CategoryRepository
+      include Pagination
       attr_reader :categories
 
       def initialize(model: nil)
@@ -55,8 +56,13 @@ module Infra
         nil
       end
 
-      def list
+      def list(request_dto = nil)
         categories = @model.all
+
+        unless request_dto.nil?
+          categories = paginate(scope: @model.all, page: request_dto.page, page_size: request_dto.page_size)
+          categories = order_by(scope: categories, order_by: request_dto.order_by)
+        end
 
         categories.map { |category| @mapper.to_entity(category) }
       end
