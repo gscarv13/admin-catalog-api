@@ -5,8 +5,8 @@ module Application
         @genre_repository = genre_repository
       end
 
-      def execute(_request_dto)
-        genres = @genre_repository.list
+      def execute(request_dto)
+        genres = @genre_repository.list(request_dto)
 
         data = genres.map do |genre|
           DTO::GenreOutput.new(

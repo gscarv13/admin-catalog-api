@@ -2,36 +2,9 @@
 
 module Infra
   module Repository
-    class GenreMapper
-      def initialize(genre_model: nil, category_model: nil)
-        @genre_model = genre_model || Genre
-        @category_model = category_model || Category
-      end
-
-      def to_entity(model)
-        Domain::Genre.new(
-          id: model.id,
-          name: model.name,
-          categories: model.categories.pluck(:id),
-          is_active: model.is_active
-        )
-      end
-
-      def to_model(entity)
-        categories = entity.categories.map do |id|
-          @category_model.find_by(id:) || raise(Exceptions::CategoryNotFound.new(id:))
-        end
-
-        @genre_model.new(
-          id: entity.id,
-          name: entity.name,
-          categories:,
-          is_active: entity.is_active
-        )
-      end
-    end
-
     class ActiveRecordGenreRepository < Domain::GenreRepository
+      include Pagination
+
       def initialize(genre_model: nil, category_model: nil)
         @genre_model = genre_model || Genre
         @category_model = category_model || Category
@@ -67,10 +40,11 @@ module Infra
         persisted_genre.update!(**genre.to_h, categories:)
       end
 
-      def list
-        records = @genre_model.all
+      def list(request_dto = nil)
+        genres = paginate(scope: @genre_model.all, page: request_dto&.page, page_size: request_dto&.page_size)
+        genres = order_by(scope: genres, order_by: request_dto&.order_by)
 
-        records.map { |record| @mapper.to_entity(record) }
+        genres.map { |record| @mapper.to_entity(record) }
       end
     end
   end
