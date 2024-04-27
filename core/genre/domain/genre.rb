@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Domain
-  class Genre
+  class Genre < ApplicationDomain
     attr_accessor :name, :categories
     attr_reader :id, :is_active
 
@@ -34,24 +34,6 @@ module Domain
 
     def remove_category(category)
       @categories.delete(category)
-    end
-
-    def ==(other)
-      return false unless other.is_a? Genre
-
-      @id == other.id &&
-        @name == other.name &&
-        @categories == other.categories &&
-        @is_active == other.is_active
-    end
-
-    def to_h
-      {
-        id: @id,
-        name: @name,
-        categories: @categories,
-        is_active: @is_active
-      }
     end
 
     def validate(name)

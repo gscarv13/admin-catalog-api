@@ -29,6 +29,15 @@ module Infra
           is_active: entity.is_active
         )
       end
+
+      def entity_to_hash(entity)
+        {
+          id: entity.id,
+          name: entity.name,
+          categories: entity.categories,
+          is_active: entity.is_active
+        }
+      end
     end
   end
 end

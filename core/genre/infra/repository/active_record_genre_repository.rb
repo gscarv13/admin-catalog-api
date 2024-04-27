@@ -37,7 +37,8 @@ module Infra
           @category_model.find_by(id:) || raise(Exceptions::CategoryNotFound.new(id:))
         end
 
-        persisted_genre.update!(**genre.to_h, categories:)
+        genre_attributes = @mapper.entity_to_hash(genre)
+        persisted_genre.update!(**genre_attributes, categories:)
       end
 
       def list(request_dto = nil)
