@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class CreateGenreOutput < ApplicationStruct
       attribute :id, Types::UUID
     end

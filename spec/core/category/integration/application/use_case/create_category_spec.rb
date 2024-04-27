@@ -8,7 +8,7 @@ RSpec.describe 'Create and persist a category' do
 
     repository = Infra::Repository::ActiveRecordCategoryRepository.new
     use_case = Application::UseCase::CreateCategory.new(repository:)
-    request_dto = Application::Dto::CreateCategoryInput.new(
+    request_dto = Application::DTO::CreateCategoryInput.new(
       name: 'Moooovie',
       description: 'A very niiiiice movie',
       is_active: true
@@ -28,7 +28,7 @@ RSpec.describe 'Create and persist a category' do
   it 'should not create a new category with invalid data' do
     repository = Infra::Repository::ActiveRecordCategoryRepository.new
     use_case = Application::UseCase::CreateCategory.new(repository:)
-    request_dto = Application::Dto::CreateCategoryInput.new(
+    request_dto = Application::DTO::CreateCategoryInput.new(
       name: 'a' * 256
     )
 

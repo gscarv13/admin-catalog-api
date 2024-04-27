@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class ListCategoryInput < ApplicationStruct
       attribute :order_by, Types::String.default('name')
       attribute :page, Types::Integer.default(1)

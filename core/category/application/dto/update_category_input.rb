@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class UpdateCategoryInput < ApplicationStruct
       attribute :id, Types::UUID
       attribute :name, Types::String.optional.default(nil)

@@ -16,7 +16,7 @@ module Application
 
         @repository.save(category)
 
-        Dto::CreateCategoryOutput.new(id: category.id)
+        DTO::CreateCategoryOutput.new(id: category.id)
       rescue ArgumentError => e
         raise(Exceptions::InvalidCategoryData, e)
       end

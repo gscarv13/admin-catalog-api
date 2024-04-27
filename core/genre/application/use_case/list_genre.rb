@@ -9,7 +9,7 @@ module Application
         genres = @genre_repository.list
 
         data = genres.map do |genre|
-          Dto::GenreOutput.new(
+          DTO::GenreOutput.new(
             id: genre.id,
             name: genre.name,
             is_active: genre.is_active,
@@ -17,7 +17,7 @@ module Application
           )
         end
 
-        Dto::ListGenreOutput.new(data:)
+        DTO::ListGenreOutput.new(data:)
       end
     end
   end

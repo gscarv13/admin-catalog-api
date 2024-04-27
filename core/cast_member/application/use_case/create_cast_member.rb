@@ -15,7 +15,7 @@ module Application
 
         @cast_member_repository.save(category)
 
-        Dto::CreateCastMemberOutput.new(id: category.id)
+        DTO::CreateCastMemberOutput.new(id: category.id)
       rescue ArgumentError => e
         raise(Exceptions::InvalidCastMemberData, e)
       end

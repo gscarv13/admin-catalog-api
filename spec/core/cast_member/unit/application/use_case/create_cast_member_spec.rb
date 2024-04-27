@@ -7,7 +7,7 @@ RSpec.describe Application::UseCase::CreateCastMember do
 
   it 'should throw ArgumentError if name is missing' do
     use_case = Application::UseCase::CreateCastMember.new(cast_member_repository: repository_double)
-    request_dto = Application::Dto::CreateCastMemberInput.new(name: '', type: 'actor')
+    request_dto = Application::DTO::CreateCastMemberInput.new(name: '', type: 'actor')
 
     expect { use_case.execute(request_dto) }
       .to(raise_error(Exceptions::InvalidCastMemberData, 'name ["must be filled"]'))
@@ -15,7 +15,7 @@ RSpec.describe Application::UseCase::CreateCastMember do
 
   it 'should throw ArgumentError if type is missing' do
     use_case = Application::UseCase::CreateCastMember.new(cast_member_repository: repository_double)
-    request_dto = Application::Dto::CreateCastMemberInput.new(name: 'Adel', type: '')
+    request_dto = Application::DTO::CreateCastMemberInput.new(name: 'Adel', type: '')
 
     expect { use_case.execute(request_dto) }
       .to(raise_error(Exceptions::InvalidCastMemberData, 'type ["must be filled"]'))
@@ -26,7 +26,7 @@ RSpec.describe Application::UseCase::CreateCastMember do
     allow(SecureRandom).to receive(:uuid).and_return(uuid)
 
     use_case = Application::UseCase::CreateCastMember.new(cast_member_repository: repository_double)
-    request_dto = Application::Dto::CreateCastMemberInput.new(
+    request_dto = Application::DTO::CreateCastMemberInput.new(
       name: 'Kurtz',
       type: 'actor'
     )

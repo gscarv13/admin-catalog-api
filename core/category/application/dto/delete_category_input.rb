@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class DeleteCategoryInput < ApplicationStruct
       attribute :id, Types::UUID
     end

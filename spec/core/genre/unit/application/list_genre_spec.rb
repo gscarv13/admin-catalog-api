@@ -13,9 +13,9 @@ RSpec.describe Application::UseCase::ListGenre do
     )
 
     use_case = Application::UseCase::ListGenre.new(genre_repository:)
-    response_dto = use_case.execute(Application::Dto::ListGenreInput.new)
+    response_dto = use_case.execute(Application::DTO::ListGenreInput.new)
 
-    expect(response_dto).to(be_a(Application::Dto::ListGenreOutput))
+    expect(response_dto).to(be_a(Application::DTO::ListGenreOutput))
     expect(response_dto.data).to(eq([]))
   end
 
@@ -28,11 +28,11 @@ RSpec.describe Application::UseCase::ListGenre do
     genre_repository = instance_double(Domain::GenreRepository, list: [genre])
 
     use_case = Application::UseCase::ListGenre.new(genre_repository:)
-    response_dto = use_case.execute(Application::Dto::ListGenreInput.new)
+    response_dto = use_case.execute(Application::DTO::ListGenreInput.new)
 
-    expect(response_dto).to(be_a(Application::Dto::ListGenreOutput))
+    expect(response_dto).to(be_a(Application::DTO::ListGenreOutput))
     expect(response_dto.data).to(eq([
-                                      Application::Dto::GenreOutput.new(
+                                      Application::DTO::GenreOutput.new(
                                         id: genre.id,
                                         name: 'Comedy',
                                         is_active: true,

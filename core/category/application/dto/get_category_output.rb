@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class GetCategoryOutput < Dry::Struct
       attribute :id, Types::UUID
       attribute :name, Types::String

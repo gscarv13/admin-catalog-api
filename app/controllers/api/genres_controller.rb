@@ -5,7 +5,7 @@ module Api
     def index
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
       use_case = Application::UseCase::ListGenre.new(genre_repository:)
-      input = Application::Dto::ListGenreInput
+      input = Application::DTO::ListGenreInput
       output = use_case.execute(input)
 
       render json: {
@@ -17,7 +17,7 @@ module Api
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
       category_repository = Infra::Repository::ActiveRecordCategoryRepository.new
       use_case = Application::UseCase::CreateGenre.new(genre_repository:, category_repository:)
-      input = Application::Dto::CreateGenreInput.new(create_params)
+      input = Application::DTO::CreateGenreInput.new(create_params)
       output = use_case.execute(input)
 
       render json: {
@@ -32,7 +32,7 @@ module Api
     def destroy
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
       use_case = Application::UseCase::DeleteGenre.new(genre_repository:)
-      input = Application::Dto::DeleteGenreInput.new(id: params[:id])
+      input = Application::DTO::DeleteGenreInput.new(id: params[:id])
       use_case.execute(input)
 
       head :no_content
@@ -44,7 +44,7 @@ module Api
       category_repository = Infra::Repository::ActiveRecordCategoryRepository.new
       genre_repository = Infra::Repository::ActiveRecordGenreRepository.new
       use_case = Application::UseCase::UpdateGenre.new(genre_repository:, category_repository:)
-      input = Application::Dto::UpdateGenreInput.new(update_params)
+      input = Application::DTO::UpdateGenreInput.new(update_params)
       use_case.execute(input)
 
       head :no_content

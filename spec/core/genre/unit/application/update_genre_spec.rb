@@ -8,7 +8,7 @@ RSpec.describe Application::UseCase::UpdateGenre do
     category_repository = instance_double(Domain::CategoryRepository, get_by_id: nil)
 
     use_case = Application::UseCase::UpdateGenre.new(genre_repository:, category_repository:)
-    request_dto = Application::Dto::UpdateGenreInput.new(
+    request_dto = Application::DTO::UpdateGenreInput.new(
       id: SecureRandom.uuid,
       name: 'Horror',
       categories: [],
@@ -26,7 +26,7 @@ RSpec.describe Application::UseCase::UpdateGenre do
     category_repository = instance_double(Domain::CategoryRepository, get_by_id: nil)
 
     use_case = Application::UseCase::UpdateGenre.new(genre_repository:, category_repository:)
-    request_dto = Application::Dto::UpdateGenreInput.new(
+    request_dto = Application::DTO::UpdateGenreInput.new(
       id: genre.id,
       name: '',
       categories: [],
@@ -45,7 +45,7 @@ RSpec.describe Application::UseCase::UpdateGenre do
 
     unkown_id = SecureRandom.uuid
     use_case = Application::UseCase::UpdateGenre.new(genre_repository:, category_repository:)
-    request_dto = Application::Dto::UpdateGenreInput.new(
+    request_dto = Application::DTO::UpdateGenreInput.new(
       id: genre.id,
       name: 'Western',
       categories: [unkown_id],
@@ -72,7 +72,7 @@ RSpec.describe Application::UseCase::UpdateGenre do
       category_repository:
     )
 
-    request_dto = Application::Dto::UpdateGenreInput.new(
+    request_dto = Application::DTO::UpdateGenreInput.new(
       id: genre.id,
       name: 'Horror',
       categories: [category.id],

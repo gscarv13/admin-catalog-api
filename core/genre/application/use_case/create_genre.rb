@@ -22,7 +22,7 @@ module Application
 
         @genre_repository.save(genre)
 
-        Dto::CreateGenreOutput.new(id: genre.id)
+        DTO::CreateGenreOutput.new(id: genre.id)
       rescue ArgumentError => e
         raise Exceptions::InvalidGenreData, e.message
       end

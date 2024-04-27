@@ -11,14 +11,14 @@ module Application
         cast_members = @cast_member_repository.list
 
         data = cast_members.map do |cast_member|
-          Dto::CastMemberOutput.new(
+          DTO::CastMemberOutput.new(
             id: cast_member.id,
             name: cast_member.name,
             type: cast_member.type
           )
         end
 
-        Dto::ListCastMemberOutput.new(data:)
+        DTO::ListCastMemberOutput.new(data:)
       end
     end
   end

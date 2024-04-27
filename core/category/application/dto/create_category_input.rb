@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class CreateCategoryInput < Dry::Struct
       attribute :name, Types::String
       attribute :description, Types::String.optional.default('')

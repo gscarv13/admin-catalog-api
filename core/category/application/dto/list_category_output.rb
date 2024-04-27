@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class ListCategoryOutput < ApplicationStruct
       attribute :data, Types::Array.of(CategoryOutput)
 

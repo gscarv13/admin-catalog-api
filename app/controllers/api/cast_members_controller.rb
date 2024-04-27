@@ -5,7 +5,7 @@ module Api
     def index
       cast_member_repository = Infra::Repository::ActiveRecordCastMemberRepository.new
       use_case = Application::UseCase::ListCastMember.new(cast_member_repository:)
-      input = Application::Dto::ListCastMemberInput
+      input = Application::DTO::ListCastMemberInput
       output = use_case.execute(input)
 
       render json: {
@@ -16,7 +16,7 @@ module Api
     def create
       cast_member_repository = Infra::Repository::ActiveRecordCastMemberRepository.new
       use_case = Application::UseCase::CreateCastMember.new(cast_member_repository:)
-      input = Application::Dto::CreateCastMemberInput.new(create_params)
+      input = Application::DTO::CreateCastMemberInput.new(create_params)
       output = use_case.execute(input)
 
       render json: {
@@ -29,7 +29,7 @@ module Api
     def destroy
       cast_member_repository = Infra::Repository::ActiveRecordCastMemberRepository.new
       use_case = Application::UseCase::DeleteCastMember.new(cast_member_repository:)
-      input = Application::Dto::DeleteCastMemberInput.new(id: params[:id])
+      input = Application::DTO::DeleteCastMemberInput.new(id: params[:id])
       use_case.execute(input)
 
       head :no_content
@@ -40,7 +40,7 @@ module Api
     def update
       cast_member_repository = Infra::Repository::ActiveRecordCastMemberRepository.new
       use_case = Application::UseCase::UpdateCastMember.new(cast_member_repository:)
-      input = Application::Dto::UpdateCastMemberInput.new(update_params)
+      input = Application::DTO::UpdateCastMemberInput.new(update_params)
       use_case.execute(input)
 
       head :no_content

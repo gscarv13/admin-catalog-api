@@ -10,9 +10,9 @@ RSpec.describe Application::UseCase::ListCategory do
     )
 
     use_case = Application::UseCase::ListCategory.new(repository:)
-    response_dto = use_case.execute(Application::Dto::ListCategoryInput.new)
+    response_dto = use_case.execute(Application::DTO::ListCategoryInput.new)
 
-    expect(response_dto).to(be_a(Application::Dto::ListCategoryOutput))
+    expect(response_dto).to(be_a(Application::DTO::ListCategoryOutput))
     expect(response_dto.data).to(eq([]))
   end
 
@@ -34,17 +34,17 @@ RSpec.describe Application::UseCase::ListCategory do
     )
 
     use_case = Application::UseCase::ListCategory.new(repository:)
-    response_dto = use_case.execute(Application::Dto::ListCategoryInput.new)
+    response_dto = use_case.execute(Application::DTO::ListCategoryInput.new)
 
-    expect(response_dto).to(be_a(Application::Dto::ListCategoryOutput))
+    expect(response_dto).to(be_a(Application::DTO::ListCategoryOutput))
     expect(response_dto.data).to(eq([
-                                      Application::Dto::CategoryOutput.new(
+                                      Application::DTO::CategoryOutput.new(
                                         id: movie_category.id,
                                         name: 'Moooovie',
                                         description: 'A very niiiiice movie',
                                         is_active: false
                                       ),
-                                      Application::Dto::CategoryOutput.new(
+                                      Application::DTO::CategoryOutput.new(
                                         id: tvshow_category.id,
                                         name: 'TV Show',
                                         description: 'A thrilling TV show',

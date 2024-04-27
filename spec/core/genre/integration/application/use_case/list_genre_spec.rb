@@ -17,12 +17,12 @@ RSpec.describe ' Application::UseCase::ListGenre integration specs' do
 
     use_case = Application::UseCase::ListGenre.new(genre_repository:)
 
-    request_dto = Application::Dto::ListGenreInput.new
+    request_dto = Application::DTO::ListGenreInput.new
     response_dto = use_case.execute(request_dto)
 
-    expect(response_dto).to(be_a(Application::Dto::ListGenreOutput))
+    expect(response_dto).to(be_a(Application::DTO::ListGenreOutput))
     expect(response_dto.data).to(eq([
-                                      Application::Dto::GenreOutput.new(
+                                      Application::DTO::GenreOutput.new(
                                         id: genre.id,
                                         name: genre.name,
                                         is_active: genre.is_active,
@@ -36,10 +36,10 @@ RSpec.describe ' Application::UseCase::ListGenre integration specs' do
 
     use_case = Application::UseCase::ListGenre.new(genre_repository:)
 
-    request_dto = Application::Dto::ListGenreInput.new
+    request_dto = Application::DTO::ListGenreInput.new
     response_dto = use_case.execute(request_dto)
 
-    expect(response_dto).to(be_a(Application::Dto::ListGenreOutput))
+    expect(response_dto).to(be_a(Application::DTO::ListGenreOutput))
     expect(response_dto.data).to(eq([]))
   end
 end

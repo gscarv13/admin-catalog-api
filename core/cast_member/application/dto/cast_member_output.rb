@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class CastMemberOutput < ApplicationStruct
       attribute :id, Types::UUID
       attribute :name, Types::String

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Application
-  module Dto
+  module DTO
     class CategoryOutput < ApplicationStruct
       attribute :id, Types::String
       attribute :name, Types::String

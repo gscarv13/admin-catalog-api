@@ -9,7 +9,7 @@ RSpec.describe Application::UseCase::ListCastMember do
 
     result = use_case.execute
 
-    expect(result).to(be_a(Application::Dto::ListCastMemberOutput))
+    expect(result).to(be_a(Application::DTO::ListCastMemberOutput))
   end
 
   it 'should return empty list if no cast members are found' do
@@ -30,12 +30,12 @@ RSpec.describe Application::UseCase::ListCastMember do
 
     result = use_case.execute
     expect(result.data).to(eq([
-                                Application::Dto::CastMemberOutput.new(
+                                Application::DTO::CastMemberOutput.new(
                                   id: cast_member1.id,
                                   name: 'John Doe',
                                   type: 'actor'
                                 ),
-                                Application::Dto::CastMemberOutput.new(
+                                Application::DTO::CastMemberOutput.new(
                                   id: cast_member2.id,
                                   name: 'Jane Doe',
                                   type: 'director'

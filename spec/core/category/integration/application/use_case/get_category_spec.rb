@@ -21,13 +21,13 @@ RSpec.describe 'GetCategory integration test' do
     repository.save(tvshow_category)
 
     use_case = Application::UseCase::GetCategory.new(repository:)
-    request_dto = Application::Dto::GetCategoryInput.new(id: movie_category.id)
+    request_dto = Application::DTO::GetCategoryInput.new(id: movie_category.id)
 
     response_dto = use_case.execute(request_dto)
 
     expect(response_dto)
       .to(eq(
-            Application::Dto::GetCategoryOutput.new(
+            Application::DTO::GetCategoryOutput.new(
               id: movie_category.id,
               name: 'Moooovie',
               description: 'A very niiiiice movie',
@@ -55,7 +55,7 @@ RSpec.describe 'GetCategory integration test' do
 
     use_case = Application::UseCase::GetCategory.new(repository:)
     not_found_id = SecureRandom.uuid
-    request_dto = Application::Dto::GetCategoryInput.new(id: not_found_id)
+    request_dto = Application::DTO::GetCategoryInput.new(id: not_found_id)
 
     expect { use_case.execute(request_dto) }
       .to(

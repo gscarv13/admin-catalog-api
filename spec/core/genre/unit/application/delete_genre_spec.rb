@@ -5,7 +5,7 @@ RSpec.describe Application::UseCase::DeleteGenre do
     genre = Domain::Genre.new(name: 'Comedy')
     genre_repository = instance_double(Domain::GenreRepository, delete: nil, get_by_id: genre)
     use_case = Application::UseCase::DeleteGenre.new(genre_repository:)
-    request_dto = Application::Dto::DeleteGenreInput.new(id: genre.id)
+    request_dto = Application::DTO::DeleteGenreInput.new(id: genre.id)
     use_case.execute(request_dto)
 
     expect(genre_repository).to(have_received(:delete).with(id: genre.id))
@@ -15,7 +15,7 @@ RSpec.describe Application::UseCase::DeleteGenre do
     not_found_id = SecureRandom.uuid
     genre_repository = instance_double(Domain::GenreRepository, delete: nil, get_by_id: nil)
     use_case = Application::UseCase::DeleteGenre.new(genre_repository:)
-    request_dto = Application::Dto::DeleteGenreInput.new(id: not_found_id)
+    request_dto = Application::DTO::DeleteGenreInput.new(id: not_found_id)
 
     expect { use_case.execute(request_dto) }.to(raise_error(
                                                   Exceptions::GenreNotFound,

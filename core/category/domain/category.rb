@@ -6,12 +6,13 @@ module Domain
     attr_reader :id, :is_active
 
     def initialize(name:, id: nil, description: nil, is_active: true)
-      validate(name)
-
       @id = id || SecureRandom.uuid
       @name = name
       @description = description
       @is_active = is_active
+      @notification = Notification.new
+
+      validate(name)
     end
 
     def update_category(name:, description:)
@@ -50,8 +51,10 @@ module Domain
     private
 
     def validate(name)
-      raise ArgumentError, 'name must be present' if name.nil? || name.empty?
-      raise ArgumentError, 'name must be less than 256 characters' if name.size > 255
+      @notification.add_error('name must be present') if name.nil? || name.empty?
+      @notification.add_error('name must be less than 256 characters') if name&.size&.> 255
+
+      raise ArgumentError, @notification.messages if @notification.errors?
     end
   end
 end

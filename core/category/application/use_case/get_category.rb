@@ -12,7 +12,7 @@ module Application
 
         raise Exceptions::CategoryNotFound.new(id: request_dto.id) if category.nil?
 
-        Dto::GetCategoryOutput.new(
+        DTO::GetCategoryOutput.new(
           id: category.id,
           name: category.name,
           description: category.description,
