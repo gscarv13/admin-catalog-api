@@ -3,13 +3,9 @@
 module Api
   class CastMembersController < ApplicationController
     def index
-      page = params.fetch('page', nil)
-      page_size = params.fetch('page_size', nil)
-      order_by = params.fetch('order_by', nil)
-
       cast_member_repository = Infra::Repository::ActiveRecordCastMemberRepository.new
       use_case = Application::UseCase::ListCastMember.new(cast_member_repository:)
-      input = Application::DTO::ListCastMemberInput.new(page:, page_size:, order_by:)
+      input = Application::DTO::ListCastMemberInput.new(default_pagination_params)
       output = use_case.execute(input)
 
       render json: {
