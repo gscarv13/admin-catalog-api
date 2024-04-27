@@ -23,3 +23,6 @@ Metrics/BlockLength:
 
 Lint/MissingSuper:
   Enabled: false
+
+Metrics/MethodLength:
+  Max: 25
