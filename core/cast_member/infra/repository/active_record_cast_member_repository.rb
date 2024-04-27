@@ -2,29 +2,8 @@
 
 module Infra
   module Repository
-    class CastMemberMapper
-      def initialize(cast_member_model: nil)
-        @cast_member_model = cast_member_model || CastMember
-      end
-
-      def to_entity(model)
-        Domain::CastMember.new(
-          id: model.id,
-          name: model.name,
-          type: model.role_type
-        )
-      end
-
-      def to_model(entity)
-        @cast_member_model.new(
-          id: entity.id,
-          name: entity.name,
-          role_type: entity.type
-        )
-      end
-    end
-
     class ActiveRecordCastMemberRepository < Domain::CastMemberRepository
+      include Pagination
       def initialize(cast_member_model: nil)
         @cast_member_model = cast_member_model || CastMember
         @mapper = CastMemberMapper.new(cast_member_model: @cast_member_model)
@@ -57,10 +36,12 @@ module Infra
         persisted_cast_member.update!(**params)
       end
 
-      def list
-        records = @cast_member_model.all
+      def list(request_dto = nil)
+        cast_members = paginate(scope: @cast_member_model.all, page: request_dto&.page,
+                                page_size: request_dto&.page_size)
+        cast_members = order_by(scope: cast_members, order_by: request_dto&.order_by)
 
-        records.map { |record| @mapper.to_entity(record) }
+        cast_members.map { |record| @mapper.to_entity(record) }
       end
     end
   end

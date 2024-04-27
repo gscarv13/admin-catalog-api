@@ -7,8 +7,8 @@ module Application
         @cast_member_repository = cast_member_repository
       end
 
-      def execute(_request_dto)
-        cast_members = @cast_member_repository.list
+      def execute(request_dto)
+        cast_members = @cast_member_repository.list(request_dto)
 
         data = cast_members.map do |cast_member|
           DTO::CastMemberOutput.new(
