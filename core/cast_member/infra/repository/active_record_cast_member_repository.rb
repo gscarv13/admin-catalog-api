@@ -30,10 +30,9 @@ module Infra
 
       def update(cast_member)
         persisted_cast_member = @cast_member_model.find_by(id: cast_member.id)
-        params = cast_member.to_h.merge(role_type: cast_member.type)
-        params.delete(:type)
+        cast_member_attributes = @mapper.entity_to_hash(cast_member)
 
-        persisted_cast_member.update!(**params)
+        persisted_cast_member.update!(**cast_member_attributes)
       end
 
       def list(request_dto = nil)

@@ -56,16 +56,4 @@ RSpec.describe Domain::CastMember do
       expect(cast_member == other).to eq(true)
     end
   end
-
-  context '#to_h' do
-    it 'should return hash representation of cast member' do
-      cast_member = Domain::CastMember.new(name: 'John Doe', type: 'actor')
-
-      expect(cast_member.to_h).to eq({
-                                       id: cast_member.id,
-                                       name: 'John Doe',
-                                       type: 'ACTOR'
-                                     })
-    end
-  end
 end

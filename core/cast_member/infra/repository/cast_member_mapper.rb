@@ -11,7 +11,7 @@ module Infra
         Domain::CastMember.new(
           id: model.id,
           name: model.name,
-          type: model.role_type
+          type: model.type
         )
       end
 
@@ -19,8 +19,16 @@ module Infra
         @cast_member_model.new(
           id: entity.id,
           name: entity.name,
-          role_type: entity.type
+          type: entity.type
         )
+      end
+
+      def entity_to_hash(entity)
+        {
+          id: entity.id,
+          name: entity.name,
+          type: entity.type
+        }
       end
     end
   end

@@ -18,7 +18,7 @@ RSpec.describe Infra::Repository::ActiveRecordCastMemberRepository do
 
       expect(cast_member_db.id).to(eq(cast_member.id))
       expect(cast_member_db.name).to(eq(cast_member.name))
-      expect(cast_member_db.role_type).to(eq(cast_member.type))
+      expect(cast_member_db.type).to(eq(cast_member.type))
     end
   end
 
@@ -91,7 +91,7 @@ RSpec.describe Infra::Repository::ActiveRecordCastMemberRepository do
       current_cast_member = CastMember.find_by(id: cast_member.id)
 
       expect(current_cast_member.name).to(eq('Etna'))
-      expect(current_cast_member.role_type).to(eq('ACTOR'))
+      expect(current_cast_member.type).to(eq('ACTOR'))
 
       cast_member.name = 'Adel'
       cast_member.type = 'DIRECTOR'
@@ -101,7 +101,7 @@ RSpec.describe Infra::Repository::ActiveRecordCastMemberRepository do
 
       expect(updated_cast_member.id).to(eq(current_cast_member.id))
       expect(updated_cast_member.name).to(eq('Adel'))
-      expect(updated_cast_member.role_type).to(eq('DIRECTOR'))
+      expect(updated_cast_member.type).to(eq('DIRECTOR'))
     end
   end
 end

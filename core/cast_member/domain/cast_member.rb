@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Domain
-  class CastMember
+  class CastMember < ApplicationDomain
     class Contract < Dry::Validation::Contract
       params do
         optional(:id).maybe(Types::UUID)
@@ -37,22 +37,6 @@ module Domain
 
       @name = name
       @type = TYPE[type]
-    end
-
-    def ==(other)
-      return false unless other.is_a? CastMember
-
-      @id == other.id &&
-        @name == other.name &&
-        @type == other.type
-    end
-
-    def to_h
-      {
-        id: @id,
-        name: @name,
-        type: @type
-      }
     end
 
     private
