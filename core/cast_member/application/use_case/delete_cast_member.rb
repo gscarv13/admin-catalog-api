@@ -2,10 +2,6 @@
 
 module Application
   module UseCase
-    class DeleteCastMemberRequest < ApplicationStruct
-      attribute :id, Types::UUID
-    end
-
     class DeleteCastMember
       def initialize(cast_member_repository:)
         @cast_member_repository = cast_member_repository

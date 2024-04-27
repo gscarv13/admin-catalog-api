@@ -5,7 +5,7 @@ RSpec.describe Application::UseCase::DeleteCastMember do
     cast_member = Domain::CastMember.new(name: 'John Doe', type: 'actor')
     cast_member_repository = instance_double(Domain::CastMemberRepository, delete: nil, get_by_id: cast_member)
     use_case = Application::UseCase::DeleteCastMember.new(cast_member_repository:)
-    request_dto = Application::UseCase::DeleteCastMemberRequest.new(id: cast_member.id)
+    request_dto = Application::Dto::DeleteCastMemberInput.new(id: cast_member.id)
     use_case.execute(request_dto)
 
     expect(cast_member_repository).to(have_received(:delete).with(id: cast_member.id))
@@ -15,7 +15,7 @@ RSpec.describe Application::UseCase::DeleteCastMember do
     not_found_id = SecureRandom.uuid
     cast_member_repository = instance_double(Domain::CastMemberRepository, delete: nil, get_by_id: nil)
     use_case = Application::UseCase::DeleteCastMember.new(cast_member_repository:)
-    request_dto = Application::UseCase::DeleteCastMemberRequest.new(id: not_found_id)
+    request_dto = Application::Dto::DeleteCastMemberInput.new(id: not_found_id)
 
     expect { use_case.execute(request_dto) }.to(raise_error(
                                                   Exceptions::CastMemberNotFound,

@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Application::UseCase::ListCastMember do
-  it 'should return an instance of ListCastMemberResponse' do
+  it 'should return an instance of ListCastMemberOutput' do
     repository = instance_double(Domain::CastMemberRepository, list: [])
     use_case = Application::UseCase::ListCastMember.new(cast_member_repository: repository)
 
     result = use_case.execute
 
-    expect(result).to(be_a(Application::UseCase::ListCastMemberResponse))
+    expect(result).to(be_a(Application::Dto::ListCastMemberOutput))
   end
 
   it 'should return empty list if no cast members are found' do
@@ -30,12 +30,12 @@ RSpec.describe Application::UseCase::ListCastMember do
 
     result = use_case.execute
     expect(result.data).to(eq([
-                                Application::UseCase::CastMemberOutput.new(
+                                Application::Dto::CastMemberOutput.new(
                                   id: cast_member1.id,
                                   name: 'John Doe',
                                   type: 'actor'
                                 ),
-                                Application::UseCase::CastMemberOutput.new(
+                                Application::Dto::CastMemberOutput.new(
                                   id: cast_member2.id,
                                   name: 'Jane Doe',
                                   type: 'director'

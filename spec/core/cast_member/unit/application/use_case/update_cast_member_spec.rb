@@ -7,7 +7,7 @@ RSpec.describe Application::UseCase::UpdateCastMember do
     cast_member_repository = instance_double(Domain::CastMemberRepository, get_by_id: nil)
 
     use_case = Application::UseCase::UpdateCastMember.new(cast_member_repository:)
-    request_dto = Application::UseCase::UpdateCastMemberRequest.new(
+    request_dto = Application::Dto::UpdateCastMemberInput.new(
       id: SecureRandom.uuid,
       name: 'Rosalin',
       type: 'actor'
@@ -24,7 +24,7 @@ RSpec.describe Application::UseCase::UpdateCastMember do
     cast_member_repository = instance_double(Domain::CastMemberRepository, get_by_id: cast_member)
 
     use_case = Application::UseCase::UpdateCastMember.new(cast_member_repository:)
-    request_dto = Application::UseCase::UpdateCastMemberRequest.new(
+    request_dto = Application::Dto::UpdateCastMemberInput.new(
       id: cast_member.id,
       name: '',
       type: ''
@@ -46,7 +46,7 @@ RSpec.describe Application::UseCase::UpdateCastMember do
 
     use_case = Application::UseCase::UpdateCastMember.new(cast_member_repository:)
 
-    request_dto = Application::UseCase::UpdateCastMemberRequest.new(
+    request_dto = Application::Dto::UpdateCastMemberInput.new(
       id: cast_member.id,
       name: 'Rosalin',
       type: 'director'

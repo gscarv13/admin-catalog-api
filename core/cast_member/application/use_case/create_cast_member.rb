@@ -2,15 +2,6 @@
 
 module Application
   module UseCase
-    class CreateCastMemberRequest < ApplicationStruct
-      attribute :name, Types::String
-      attribute :type, Types::String
-    end
-
-    class CreateCastMemberResponse < ApplicationStruct
-      attribute :id, Types::UUID
-    end
-
     class CreateCastMember
       def initialize(cast_member_repository:)
         @cast_member_repository = cast_member_repository
@@ -24,7 +15,7 @@ module Application
 
         @cast_member_repository.save(category)
 
-        CreateCastMemberResponse.new(id: category.id)
+        Dto::CreateCastMemberOutput.new(id: category.id)
       rescue ArgumentError => e
         raise(Exceptions::InvalidCastMemberData, e)
       end

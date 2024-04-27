@@ -2,19 +2,6 @@
 
 module Application
   module UseCase
-    class ListCastMemberRequest < ApplicationStruct
-    end
-
-    class CastMemberOutput < ApplicationStruct
-      attribute :id, Types::UUID
-      attribute :name, Types::String
-      attribute :type, Types::String
-    end
-
-    class ListCastMemberResponse < ApplicationStruct
-      attribute :data, Types::Array.of(CastMemberOutput)
-    end
-
     class ListCastMember
       def initialize(cast_member_repository:)
         @cast_member_repository = cast_member_repository
@@ -24,14 +11,14 @@ module Application
         cast_members = @cast_member_repository.list
 
         data = cast_members.map do |cast_member|
-          CastMemberOutput.new(
+          Dto::CastMemberOutput.new(
             id: cast_member.id,
             name: cast_member.name,
             type: cast_member.type
           )
         end
 
-        ListCastMemberResponse.new(data:)
+        Dto::ListCastMemberOutput.new(data:)
       end
     end
   end

@@ -2,12 +2,6 @@
 
 module Application
   module UseCase
-    class UpdateCastMemberRequest < ApplicationStruct
-      attribute :id, Types::UUID
-      attribute :name, Types::String
-      attribute :type, Types::String
-    end
-
     class UpdateCastMember
       def initialize(cast_member_repository:)
         @cast_member_repository = cast_member_repository
