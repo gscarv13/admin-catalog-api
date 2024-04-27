@@ -41,7 +41,8 @@ module Infra
 
       def update(category)
         current_category = @model.find_by(id: category.id)
-        current_category&.assign_attributes(category.to_h)
+        category_attributes = @mapper.entity_to_hash(category)
+        current_category&.assign_attributes(category_attributes)
         current_category&.save!
 
         nil

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Domain
-  class Category
+  class Category < ApplicationDomain
     attr_accessor :name, :description
     attr_reader :id, :is_active
 
@@ -30,28 +30,10 @@ module Domain
       @is_active = false
     end
 
-    def ==(other)
-      return false unless other.is_a? Category
-
-      @id == other.id &&
-        @name == other.name &&
-        @description == other.description &&
-        @is_active == other.is_active
-    end
-
-    def to_h
-      {
-        id: @id,
-        name: @name,
-        description: @description,
-        is_active: @is_active
-      }
-    end
-
     private
 
     def validate(name)
-      @notification.add_error('name must be present') if name.nil? || name.empty?
+      @notification.add_error('name must be present') if name.nil? || name.blank?
       @notification.add_error('name must be less than 256 characters') if name&.size&.> 255
 
       raise ArgumentError, @notification.messages if @notification.errors?
