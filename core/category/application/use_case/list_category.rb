@@ -7,7 +7,7 @@ module Application
         @repository = repository
       end
 
-      def execute(request_dto = ListCategoryRequest.new)
+      def execute(request_dto)
         categories = @repository.list(request_dto)
 
         data = categories.map do |category|
@@ -19,13 +19,12 @@ module Application
           )
         end
 
-        sorted_data = data.sort_by { |category| category.send(request_dto.order_by.to_sym) }
         DTO::ListCategoryOutput.new(
-          data: sorted_data,
+          data:,
           meta: {
             current_page: request_dto.page,
             page_size: request_dto.page_size,
-            total: sorted_data.size
+            total: data.size
           }
         )
       end
