@@ -34,4 +34,6 @@ module Exceptions
   end
 
   class InvalidCastMemberData < StandardError; end
+
+  class RelatedAssociationsNotFound < StandardError; end
 end
