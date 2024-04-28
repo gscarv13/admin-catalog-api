@@ -26,3 +26,6 @@ Lint/MissingSuper:
 
 Metrics/MethodLength:
   Max: 25
+
+Naming/VariableNumber:
+  Enabled: false
