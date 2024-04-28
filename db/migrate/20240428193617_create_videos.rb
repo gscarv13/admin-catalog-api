@@ -1,6 +1,6 @@
 class CreateVideos < ActiveRecord::Migration[7.1]
   def change
-    create_table :videos, id: :uuid do |t|
+    create_table :videos, id: :string do |t|
       t.string :title
       t.text :description
       t.integer :launch_year

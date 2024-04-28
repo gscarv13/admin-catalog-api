@@ -55,7 +55,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_28_195820) do
     t.string "video_id"
   end
 
-# Could not dump table "videos" because of following StandardError
-#   Unknown type 'uuid' for column 'id'
+  create_table "videos", id: :string, force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "launch_year"
+    t.string "duration"
+    t.boolean "published"
+    t.integer "rating", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

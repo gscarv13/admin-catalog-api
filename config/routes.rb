@@ -14,5 +14,6 @@ Rails.application.routes.draw do
     resources :categories, only: %i[index show create update destroy]
     resources :genres, only: %i[index create update destroy]
     resources :cast_members, only: %i[index create update destroy]
+    resources :videos, only: %i[create]
   end
 end

@@ -6,9 +6,9 @@ RSpec.describe Application::UseCase::CreateVideoWithoutMedia do
   let(:cast_member) { Domain::CastMember.new(name: 'Tink', type: 'director') }
 
   let(:video_repository) { instance_double(Domain::VideoRepository, save: nil) }
-  let(:categories_repository) { instance_double(Domain::CategoryRepository, list: [category]) }
-  let(:genres_repository) { instance_double(Domain::GenreRepository, list: [genre]) }
-  let(:cast_members_repository) { instance_double(Domain::CastMemberRepository, list: [cast_member]) }
+  let(:category_repository) { instance_double(Domain::CategoryRepository, list: [category]) }
+  let(:genre_repository) { instance_double(Domain::GenreRepository, list: [genre]) }
+  let(:cast_member_repository) { instance_double(Domain::CastMemberRepository, list: [cast_member]) }
 
   it 'should throw error if category id is not persisted' do
     invalid_category_id = SecureRandom.uuid
@@ -26,9 +26,9 @@ RSpec.describe Application::UseCase::CreateVideoWithoutMedia do
 
     use_case = Application::UseCase::CreateVideoWithoutMedia.new(
       video_repository:,
-      categories_repository:,
-      genres_repository:,
-      cast_members_repository:
+      category_repository:,
+      genre_repository:,
+      cast_member_repository:
     )
 
     expect { use_case.execute(input) }.to(raise_error(
@@ -53,9 +53,9 @@ RSpec.describe Application::UseCase::CreateVideoWithoutMedia do
 
     use_case = Application::UseCase::CreateVideoWithoutMedia.new(
       video_repository:,
-      categories_repository:,
-      genres_repository:,
-      cast_members_repository:
+      category_repository:,
+      genre_repository:,
+      cast_member_repository:
     )
 
     expect { use_case.execute(input) }.to(raise_error(
@@ -80,9 +80,9 @@ RSpec.describe Application::UseCase::CreateVideoWithoutMedia do
 
     use_case = Application::UseCase::CreateVideoWithoutMedia.new(
       video_repository:,
-      categories_repository:,
-      genres_repository:,
-      cast_members_repository:
+      category_repository:,
+      genre_repository:,
+      cast_member_repository:
     )
 
     expect { use_case.execute(input) }.to(raise_error(
@@ -110,9 +110,9 @@ RSpec.describe Application::UseCase::CreateVideoWithoutMedia do
 
     use_case = Application::UseCase::CreateVideoWithoutMedia.new(
       video_repository:,
-      categories_repository:,
-      genres_repository:,
-      cast_members_repository:
+      category_repository:,
+      genre_repository:,
+      cast_member_repository:
     )
 
     expect { use_case.execute(input) }.to(raise_error(
@@ -138,9 +138,9 @@ RSpec.describe Application::UseCase::CreateVideoWithoutMedia do
 
     use_case = Application::UseCase::CreateVideoWithoutMedia.new(
       video_repository:,
-      categories_repository:,
-      genres_repository:,
-      cast_members_repository:
+      category_repository:,
+      genre_repository:,
+      cast_member_repository:
     )
 
     output_dto = use_case.execute(input)
