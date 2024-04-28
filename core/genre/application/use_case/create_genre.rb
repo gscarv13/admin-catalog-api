@@ -9,7 +9,8 @@ module Application
       end
 
       def execute(request_dto)
-        categories = @category_repository.list.map(&:id)
+        categories_input = Application::DTO::ListCategoryInput.new
+        categories = @category_repository.list(categories_input).map(&:id)
 
         missing = request_dto.categories - categories
         raise Exceptions::RelatedCategoriesNotFound.new(ids: missing) unless missing.empty?
