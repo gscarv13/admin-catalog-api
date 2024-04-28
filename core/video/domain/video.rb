@@ -32,11 +32,11 @@ module Domain
     RATING = {
       'er' => 'ER',
       'l' => 'L',
-      'age10' => 'AGE_10',
-      'age12' => 'AGE_12',
-      'age14' => 'AGE_14',
-      'age16' => 'AGE_16',
-      'age18' => 'AGE_18'
+      'age_10' => 'AGE_10',
+      'age_12' => 'AGE_12',
+      'age_14' => 'AGE_14',
+      'age_16' => 'AGE_16',
+      'age_18' => 'AGE_18'
     }.freeze
 
     def initialize( # rubocop:disable Metrics/ParameterLists

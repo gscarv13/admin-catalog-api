@@ -36,7 +36,7 @@ RSpec.describe Domain::Video do
         launch_year: 2022,
         duration: BigDecimal('180'),
         published: false,
-        rating: 'age12'
+        rating: 'age_12'
       )
 
       expect(video.title).to(eq('TV Show'))
