@@ -10,12 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_225753) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_28_195820) do
   create_table "cast_members", id: :string, force: :cascade do |t|
     t.string "name"
     t.integer "role_type", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cast_members_videos", id: false, force: :cascade do |t|
+    t.string "cast_member_id"
+    t.string "video_id"
   end
 
   create_table "categories", id: :string, force: :cascade do |t|
@@ -32,6 +37,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_225753) do
     t.string "category_id"
   end
 
+  create_table "categories_videos", id: false, force: :cascade do |t|
+    t.string "category_id"
+    t.string "video_id"
+  end
+
   create_table "genres", id: :string, force: :cascade do |t|
     t.string "name"
     t.boolean "is_active", default: true
@@ -39,5 +49,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_225753) do
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_genres_on_id", unique: true
   end
+
+  create_table "genres_videos", id: false, force: :cascade do |t|
+    t.string "genre_id"
+    t.string "video_id"
+  end
+
+# Could not dump table "videos" because of following StandardError
+#   Unknown type 'uuid' for column 'id'
 
 end
