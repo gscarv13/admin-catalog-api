@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class CastMember < ApplicationRecord
-  attribute :id, :string
-  attribute :name, :string
+  has_and_belongs_to_many :videos
 
   # Due to ActiveRecord defaults, we can have a column named 'type'
   # it was renamed to 'role_type', and this alias allows us to keep using CastMember#type
