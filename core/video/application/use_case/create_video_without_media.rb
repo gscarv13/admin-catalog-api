@@ -5,14 +5,14 @@ module Application
     class CreateVideoWithoutMedia
       def initialize(
         video_repository:,
-        categories_repository:,
-        genres_repository:,
-        cast_members_repository:
+        category_repository:,
+        genre_repository:,
+        cast_member_repository:
       )
         @video_repository = video_repository
-        @categories_repository = categories_repository
-        @genres_repository = genres_repository
-        @cast_members_repository = cast_members_repository
+        @category_repository = category_repository
+        @genre_repository = genre_repository
+        @cast_member_repository = cast_member_repository
 
         @notification = Notification.new
       end
@@ -45,7 +45,7 @@ module Application
 
       def validate_categories(request_dto)
         categories_input = Application::DTO::ListCategoryInput.new
-        categories = @categories_repository.list(categories_input).map(&:id)
+        categories = @category_repository.list(categories_input).map(&:id)
 
         missing = request_dto.categories - categories
         @notification.add_error("categories [#{missing.join(', ')}] not found") unless missing.empty?
@@ -53,7 +53,7 @@ module Application
 
       def validate_genres(request_dto)
         genres_input = Application::DTO::ListGenreInput.new
-        genres = @genres_repository.list(genres_input).map(&:id)
+        genres = @genre_repository.list(genres_input).map(&:id)
 
         missing = request_dto.genres - genres
         @notification.add_error("genres [#{missing.join(', ')}] not found") unless missing.empty?
@@ -61,7 +61,7 @@ module Application
 
       def validate_cast_members(request_dto)
         cast_members_input = Application::DTO::ListCastMemberInput.new
-        cast_members = @cast_members_repository.list(cast_members_input).map(&:id)
+        cast_members = @cast_member_repository.list(cast_members_input).map(&:id)
 
         missing = request_dto.cast_members - cast_members
         @notification.add_error("cast_members [#{missing.join(', ')}] not found") unless missing.empty?
