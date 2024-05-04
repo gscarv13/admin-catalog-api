@@ -5,6 +5,8 @@ class Video < ApplicationRecord
   has_and_belongs_to_many :genres
   has_and_belongs_to_many :cast_members
 
+  has_one :audio_video_medium
+
   enum rating: {
     ER: 0,
     L: 1,

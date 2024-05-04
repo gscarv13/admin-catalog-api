@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_28_195820) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_185940) do
+  create_table "audio_video_media", id: :string, force: :cascade do |t|
+    t.integer "video_id"
+    t.string "name"
+    t.string "raw_location"
+    t.string "encoded_location"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["video_id"], name: "index_audio_video_media_on_video_id"
+  end
+
   create_table "cast_members", id: :string, force: :cascade do |t|
     t.string "name"
     t.integer "role_type", default: 0
