@@ -26,18 +26,6 @@ module Infra
       end
 
       def to_model(entity)
-        categories = entity.categories.map do |id|
-          @category_model.find_by(id:) || raise(Exceptions::CategoryNotFound.new(id:))
-        end
-
-        genres = entity.genres.map do |id|
-          @genre_model.find_by(id:) || raise(Exceptions::GenreNotFound.new(id:))
-        end
-
-        cast_members = entity.cast_members.map do |id|
-          @cast_member_model.find_by(id:) || raise(Exceptions::CastMemberNotFound.new(id:))
-        end
-
         @video_model.new(
           id: entity.id,
           title: entity.title,
@@ -46,9 +34,9 @@ module Infra
           duration: entity.duration,
           published: entity.published,
           rating: entity.rating,
-          categories:,
-          genres:,
-          cast_members:
+          category_ids: entity.categories,
+          genre_ids: entity.genres,
+          cast_member_ids: entity.cast_members
         )
       end
 
@@ -61,9 +49,9 @@ module Infra
           duration: entity.duration,
           published: entity.published,
           rating: entity.rating,
-          categories: entity.categories,
-          genres: entity.genres,
-          cast_members: entity.cast_members
+          category_ids: entity.categories,
+          genre_ids: entity.genres,
+          cast_member_ids: entity.cast_members
         }
       end
     end

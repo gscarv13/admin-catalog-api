@@ -55,6 +55,7 @@ module Domain
       thumbnail_half: nil,
       trailer: nil,
       video: nil
+      # opened: false
     )
       @id = id || SecureRandom.uuid
       @title = title
@@ -63,6 +64,7 @@ module Domain
       @duration = duration
       @published = published
       @rating = RATING[rating]
+      # @opened = opened
 
       @categories = categories
       @genres = genres

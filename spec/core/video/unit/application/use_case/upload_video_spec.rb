@@ -15,7 +15,7 @@ RSpec.describe Application::UseCase::UploadVideo do
     )
 
     video_repository = instance_double(Domain::VideoRepository, get_by_id: video, update: nil)
-    storage = instance_double(StorageService, store: true)
+    storage = instance_double(Infra::Storage::AbstractStorage, store: true)
 
     use_case = Application::UseCase::UploadVideo.new(video_repository:, storage:)
 

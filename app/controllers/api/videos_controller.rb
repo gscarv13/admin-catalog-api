@@ -23,6 +23,32 @@ module Api
       render json: { error: e.message }, status: :unprocessable_entity
     end
 
+    def update
+      file = params[:video_file]
+      content = file.tempfile.read
+      content_type = file.content_type
+      file_name = file.original_filename.force_encoding('UTF-8')
+      video_id = params[:id]
+
+      video_repository = Infra::Repository::ActiveRecordVideoRepository.new
+      storage = Infra::Storage::LocalStorage.new
+
+      use_case = Application::UseCase::UploadVideo.new(
+        video_repository:, storage:
+      )
+
+      input = Application::DTO::UploadVideoInput.new(
+        video_id:,
+        file_name:,
+        content_type:,
+        content:
+      )
+
+      use_case.execute(input)
+    rescue StandardError => e
+      render json: { error: e.message }, status: :bad_request
+    end
+
     private
 
     def create_params
@@ -35,7 +61,11 @@ module Api
         genres: [],
         categories: [],
         cast_members: []
-      ).to_h.merge(duration: BigDecimal(params['duration']))
+      ).to_h
+            .merge(
+              duration: BigDecimal(params['duration']),
+              launch_year: params['launch_year'].to_i
+            )
             .symbolize_keys
     end
   end
