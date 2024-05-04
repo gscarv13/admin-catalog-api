@@ -127,5 +127,24 @@ RSpec.describe Domain::Video do
   # update_thumbnail
   # update_thumbnail_half
   # update_trailer
-  # update_video
+
+  context '#update_video_medium' do
+    it 'should update video and dispatch event' do
+      audio_video_medium = Domain::ValueObjects::AudioVideoMedium.new(
+        name: 'video.mp4',
+        raw_location: '/videos/123/video.mp4',
+        encoded_location: nil,
+        status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:pending]
+      )
+
+      video.update_video_medium(audio_video_medium)
+
+      expect(video.video).to(eq(audio_video_medium))
+      expect(video.events).to(eq([Domain::Events::AudioVideoMediumUpdated.new(
+        aggregate_id: video.id,
+        file_path: '/videos/123/video.mp4',
+        media_type: Domain::Video::MEDIA_TYPE['video']
+      )]))
+    end
+  end
 end

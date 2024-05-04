@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe Application::UseCase::UploadVideo do
   it 'should upload video and update video' do
     video = Domain::Video.new(
@@ -36,13 +38,13 @@ RSpec.describe Application::UseCase::UploadVideo do
 
     expect(video_repository).to(have_received(:update).with(video))
 
-    expected_audio_video_media = Domain::ValueObjects::AudioVideoMedia.new(
+    expected_audio_video_medium = Domain::ValueObjects::AudioVideoMedium.new(
       name: input.file_name,
       raw_location: "/videos/#{input.video_id}/#{input.file_name}",
       encoded_location: '',
-      status: Domain::ValueObjects::AudioVideoMedia::MEDIA_STATUS[:pending]
+      status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:pending]
     )
 
-    expect(video.video == expected_audio_video_media).to(eq(true))
+    expect(video.video == expected_audio_video_medium).to(eq(true))
   end
 end

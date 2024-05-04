@@ -22,14 +22,14 @@ module Application
           content_type: input_dto.content_type
         )
 
-        audio_video_media = Domain::ValueObjects::AudioVideoMedia.new(
+        audio_video_media = Domain::ValueObjects::AudioVideoMedium.new(
           name: input_dto.file_name,
           raw_location: file_path,
           encoded_location: '',
-          status: Domain::ValueObjects::AudioVideoMedia::MEDIA_STATUS[:pending]
+          status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:pending]
         )
 
-        video.update_video(audio_video_media)
+        video.update_video_medium(audio_video_media)
 
         @video_repository.update(video)
       end

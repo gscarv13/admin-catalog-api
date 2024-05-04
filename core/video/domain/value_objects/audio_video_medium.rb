@@ -2,7 +2,7 @@
 
 module Domain
   module ValueObjects
-    class AudioVideoMedia
+    class AudioVideoMedium
       attr_reader :name, :raw_location, :encoded_location, :status
 
       MEDIA_STATUS = {
