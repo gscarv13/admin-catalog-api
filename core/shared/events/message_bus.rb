@@ -3,19 +3,24 @@
 module Events
   class MessageBus < ApplicationMessageBus
     EVENT_TO_HANDLER = {
-      Events::ApplicationEvent => [::ApplicationHandler]
+      Application::Events::AudioVideoMediumUpdatedIntegrationEvent => [
+        Application::Handlers::PublishAudioVideoMedimUpdatedHandler
+          .new(event_dispatcher: Infra::Events::RabbitmqDispatcher.new)
+      ]
     }.freeze
 
     attr_reader :handlers
 
     def initialize
-      @handlers = {}
+      @handlers = {}.merge(EVENT_TO_HANDLER)
     end
 
     def handle(events: [])
       events.each do |event|
-        @handlers[event].each do |handler|
-          handler.new.handle(events: event)
+        @handlers.fetch(event.class, []).each do |handler|
+          handler.handle(event:)
+        rescue StandardError => e
+          Rails.logger.error(e)
         end
       end
     end

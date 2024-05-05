@@ -16,6 +16,6 @@ class ApplicationDomain
 
   def dispatch(event)
     @events << event
-    @message_bus.handle(event)
+    @message_bus.handle(events: [event])
   end
 end

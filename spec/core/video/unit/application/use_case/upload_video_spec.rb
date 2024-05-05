@@ -18,8 +18,9 @@ RSpec.describe Application::UseCase::UploadVideo do
 
     video_repository = instance_double(Domain::VideoRepository, get_by_id: video, update: nil)
     storage = instance_double(Infra::Storage::AbstractStorage, store: true)
+    message_bus = instance_double(Events::MessageBus, handle: true)
 
-    use_case = Application::UseCase::UploadVideo.new(video_repository:, storage:)
+    use_case = Application::UseCase::UploadVideo.new(video_repository:, storage:, message_bus:)
 
     input = Application::DTO::UploadVideoInput.new(
       video_id: video.id,
@@ -42,9 +43,16 @@ RSpec.describe Application::UseCase::UploadVideo do
       name: input.file_name,
       raw_location: "/videos/#{input.video_id}/#{input.file_name}",
       encoded_location: '',
-      status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:pending]
+      status: :pending,
+      medium_type: :video
     )
 
     expect(video.video == expected_audio_video_medium).to(eq(true))
+
+    expected_event = Application::Events::AudioVideoMediumUpdatedIntegrationEvent.new(
+      resource_id: "#{video.id}.VIDEO",
+      file_path: expected_audio_video_medium.raw_location
+    )
+    expect(message_bus).to(have_received(:handle).with(events: [expected_event]))
   end
 end
