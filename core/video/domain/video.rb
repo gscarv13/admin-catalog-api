@@ -39,11 +39,6 @@ module Domain
       'age_18' => 'AGE_18'
     }.freeze
 
-    MEDIA_TYPE = {
-      'video' => 'VIDEO',
-      'trailer' => 'TRAILER'
-    }.freeze
-
     def initialize( # rubocop:disable Metrics/ParameterLists
       title:,
       description:,
@@ -160,7 +155,7 @@ module Domain
       event = Events::AudioVideoMediumUpdated.new(
         aggregate_id: @id,
         file_path: @video.raw_location,
-        media_type: MEDIA_TYPE['video']
+        media_type: ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
       )
 
       dispatch(event)

@@ -32,9 +32,10 @@ module Api
 
       video_repository = Infra::Repository::ActiveRecordVideoRepository.new
       storage = Infra::Storage::LocalStorage.new
+      message_bus = Events::MessageBus.new
 
       use_case = Application::UseCase::UploadVideo.new(
-        video_repository:, storage:
+        video_repository:, storage:, message_bus:
       )
 
       input = Application::DTO::UploadVideoInput.new(
