@@ -2,13 +2,18 @@
 
 module Infra
   module Events
-    class RabbitmqDispatcher
-      def initialize(queue: 'videos.new')
-        @queue = queue
+    class RabbitMQDispatcher
+      def initialize(hostname: 'localhost', queue_name: 'videos.new')
+        @connection = Bunny.new(hostname:).start
+        @channel = @connection.create_channel
+        @queue = @channel.queue(queue_name)
       end
 
-      def dispatch(events:)
-        p "Dispatching event: #{events}"
+      def dispatch(event:)
+        @channel.default_exchange.publish(
+          event.to_json,
+          routing_key: @queue.name
+        )
       end
     end
   end

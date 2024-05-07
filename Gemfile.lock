@@ -75,12 +75,16 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    amq-protocol (2.3.2)
     ast (2.4.2)
     base64 (0.2.0)
     bigdecimal (3.1.7)
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bunny (2.22.0)
+      amq-protocol (~> 2.3, >= 2.3.1)
+      sorted_set (~> 1, >= 1.0.2)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -230,6 +234,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.0)
+    rbtree (0.4.6)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
     regexp_parser (2.9.0)
@@ -268,6 +273,10 @@ GEM
       parser (>= 3.2.1.0)
     ruby-progressbar (1.13.0)
     securerandom (0.3.1)
+    set (1.1.0)
+    sorted_set (1.0.3)
+      rbtree
+      set (~> 1.0)
     sqlite3 (1.7.3)
       mini_portile2 (~> 2.8.0)
     sqlite3 (1.7.3-x86_64-linux)
@@ -289,6 +298,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
+  bunny (~> 2.22)
   database_cleaner
   debug
   dry-struct (>= 1.4.0)

@@ -5,7 +5,7 @@ module Events
     EVENT_TO_HANDLER = {
       Application::Events::AudioVideoMediumUpdatedIntegrationEvent => [
         Application::Handlers::PublishAudioVideoMedimUpdatedHandler
-          .new(event_dispatcher: Infra::Events::RabbitmqDispatcher.new)
+          .new(event_dispatcher: Infra::Events::RabbitMQDispatcher.new)
       ]
     }.freeze
 
