@@ -12,11 +12,12 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_05_01_185940) do
   create_table "audio_video_media", id: :string, force: :cascade do |t|
-    t.integer "video_id"
+    t.string "video_id"
     t.string "name"
     t.string "raw_location"
     t.string "encoded_location"
     t.integer "status"
+    t.integer "media_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["video_id"], name: "index_audio_video_media_on_video_id"
