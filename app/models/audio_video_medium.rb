@@ -9,4 +9,9 @@ class AudioVideoMedium < ApplicationRecord
     COMPLETED: 2,
     ERROR: 3
   }
+
+  enum medium_type: {
+    VIDEO: 0,
+    TRAILER: 1
+  }
 end

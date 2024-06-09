@@ -6,7 +6,7 @@ class CreateAudioVideoMedia < ActiveRecord::Migration[7.1]
       t.string :raw_location
       t.string :encoded_location
       t.integer :status
-      t.integer :media_type
+      t.integer :medium_type
 
       t.timestamps
     end

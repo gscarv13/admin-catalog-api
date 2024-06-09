@@ -58,7 +58,9 @@ module Infra
             video_id: video_record.id,
             name: video.video.name,
             raw_location: video.video.raw_location,
-            encoded_location: video.video.encoded_location
+            encoded_location: video.video.encoded_location,
+            status: video.video.status,
+            medium_type: video.video.medium_type
           )
         end
 
