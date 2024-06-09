@@ -21,7 +21,8 @@ module Infra
           rating: model.rating,
           categories: model.categories.pluck(:id),
           genres: model.genres.pluck(:id),
-          cast_members: model.cast_members.pluck(:id)
+          cast_members: model.cast_members.pluck(:id),
+          video: audio_video_medium_to_value_object(model)
         )
       end
 
@@ -53,6 +54,21 @@ module Infra
           genre_ids: entity.genres,
           cast_member_ids: entity.cast_members
         }
+      end
+
+      private
+
+      def audio_video_medium_to_value_object(model)
+        return if model.audio_video_medium.nil?
+
+        audio_video_media = model.audio_video_medium
+        Domain::ValueObjects::AudioVideoMedium.new(
+          name: audio_video_media.name,
+          raw_location: audio_video_media.raw_location,
+          encoded_location: audio_video_media.encoded_location,
+          status: audio_video_media.status,
+          medium_type: audio_video_media.media_type
+        )
       end
     end
   end

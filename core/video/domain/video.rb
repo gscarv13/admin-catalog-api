@@ -161,6 +161,35 @@ module Domain
       dispatch(event)
     end
 
+    def publish
+      @published = true
+
+      validate
+    end
+
+    def process(status:, encoded_location:)
+      @video = if status == ValueObjects::AudioVideoMedium::MEDIA_STATUS[:completed]
+
+                 Domain::ValueObjects::AudioVideoMedium.new(
+                   name: @video.name,
+                   raw_location: @video.raw_location,
+                   medium_type: ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video],
+                   encoded_location:,
+                   status:
+                 )
+               else
+                 Domain::ValueObjects::AudioVideoMedium.new(
+                   name: @video.name,
+                   raw_location: @video.raw_location,
+                   medium_type: ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video],
+                   encoded_location: '',
+                   status: ValueObjects::AudioVideoMedium::STATUS[:error]
+                 )
+               end
+
+      validate
+    end
+
     private
 
     def validate

@@ -8,6 +8,6 @@ FactoryBot.define do
     launch_year { 2023 }
     duration { BigDecimal('120') }
     published { false }
-    rating { %w[ER L AGE_10 AGE_12 AGE_14 AGE_16 AGE_18].sample }
+    rating { Domain::Video::RATING.values.sample }
   end
 end

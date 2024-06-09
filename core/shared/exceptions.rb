@@ -36,4 +36,8 @@ module Exceptions
   class InvalidCastMemberData < StandardError; end
 
   class RelatedAssociationsNotFound < StandardError; end
+
+  class VideoNotFound < StandardError; end
+
+  class MediumNotFound < StandardError; end
 end
