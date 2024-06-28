@@ -63,7 +63,7 @@ module Domain
       @launch_year = launch_year
       @duration = duration
       @published = published
-      @rating = RATING[rating]
+      @rating = RATING[rating.downcase]
       # @opened = opened
 
       @categories = categories
@@ -183,7 +183,7 @@ module Domain
                    raw_location: @video.raw_location,
                    medium_type: ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video],
                    encoded_location: '',
-                   status: ValueObjects::AudioVideoMedium::STATUS[:error]
+                   status: ValueObjects::AudioVideoMedium::MEDIA_STATUS[:error]
                  )
                end
 

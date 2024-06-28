@@ -27,8 +27,8 @@ module Domain
         @name = name
         @raw_location = raw_location
         @encoded_location = encoded_location
-        @status = MEDIA_STATUS[status]
-        @medium_type = MEDIA_TYPE[medium_type]
+        @status = MEDIA_STATUS[status.downcase.to_sym]
+        @medium_type = MEDIA_TYPE[medium_type.downcase.to_sym]
       end
 
       def ==(other)
