@@ -12,7 +12,7 @@ RSpec.describe Application::UseCase::ProcessAudioVideoMedium do
       encoded_location: '',
       video_id: SecureRandom.uuid,
       status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:completed],
-      media_type: Domain::ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
+      medium_type: Domain::ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
     )
 
     expect { use_case.execute(input_dto) }.to(raise_error(Exceptions::VideoNotFound, 'Video not found'))
@@ -29,7 +29,7 @@ RSpec.describe Application::UseCase::ProcessAudioVideoMedium do
       encoded_location: '',
       video_id: video.id,
       status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:completed],
-      media_type: Domain::ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
+      medium_type: Domain::ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
     )
 
     expect { use_case.execute(input_dto) }.to(
@@ -50,7 +50,7 @@ RSpec.describe Application::UseCase::ProcessAudioVideoMedium do
       encoded_location: '',
       video_id: video.id,
       status: Domain::ValueObjects::AudioVideoMedium::MEDIA_STATUS[:completed],
-      media_type: Domain::ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
+      medium_type: Domain::ValueObjects::AudioVideoMedium::MEDIA_TYPE[:video]
     )
 
     use_case.execute(input_dto)

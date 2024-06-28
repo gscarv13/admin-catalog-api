@@ -6,7 +6,7 @@ module Application
       attribute :encoded_location, Types::String
       attribute :video_id, Types::UUID
       attribute :status, Types::String
-      attribute :media_type, Types::String
+      attribute :medium_type, Types::String
     end
   end
 end

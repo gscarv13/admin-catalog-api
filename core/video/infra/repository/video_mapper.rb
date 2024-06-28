@@ -67,7 +67,7 @@ module Infra
           raw_location: audio_video_media.raw_location,
           encoded_location: audio_video_media.encoded_location,
           status: audio_video_media.status,
-          medium_type: audio_video_media.media_type
+          medium_type: audio_video_media.medium_type
         )
       end
     end
